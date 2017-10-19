@@ -82,17 +82,12 @@
                             <a href="#"><i class="fa fa-medkit fa-fw"></i> Medicamentos<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="ver-medicamentos.jsp">Ver</a>
+                                   <a href="verMedicamentos">Ver</a>
                                 </li>
                                 <li>
                                     <a href="agregar-medicamentos.jsp">Agregar</a>
                                 </li>
-								<li>
-                                    <a href="modificar-medicamentos.jsp">Modificar</a>
-                                </li>
-								<li>
-                                    <a href="eliminar-medicamentos.jsp">Eliminar</a>
-                                </li>
+								
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -111,7 +106,7 @@
 								<li>
                                     <a href="eliminar-farmacias.html">Eliminar</a>
                                 </li>
-								
+							
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -138,18 +133,12 @@
                             <a href="#"><i class="fa fa-users fa-fw"></i> Usuarios<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="ver-usuarios.html">Ver</a>
+                                    <a href="verUsuarios">Ver</a>
                                 </li>
                                 <li>
-                                    <a href="agregar-usuarios.html">Agregar</a>
+                                    <a href="agregar-usuarios.jsp">Agregar</a>
                                 </li>
-								<li>
-                                    <a href="modificar-usuarios.html">Modificar</a>
-                                </li>
-								<li>
-                                    <a href="eliminar-usuarios.html">Eliminar</a>
-                                </li>
-								
+							
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -172,7 +161,7 @@
                                         
                                         <div class="form-group" >
                                             <label>Nombre del medicamento</label>
-                                            <input class="form-control" value="${med.nombre}" placeholder="Ingrese el nombre" name="nombres-medicamentos" id="">
+                                            <input class="form-control" required value="${med.nombre}" placeholder="Ingrese el nombre" name="nombres-medicamentos" id="">
                                         </div>
 										 <input class="form-control" value="${med.idMedicamento}" placeholder="Ingrese el nombre" type="hidden" name="id" id="">
 										<button type="submit" class="btn btn-default">Enviar</button>

@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sistema de Farmacias ChillÃ¡n</title>
+    <title>Sistema de Farmacias Chillán</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +39,20 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<script type="text/javascript">
+function validar(){
+    //Ingresamos un mensaje a mostrar
+   var mensaje = confirm('¿Desea eliminar este registro?');
+   //Detectamos si el usuario acepto el mensaje
+   if (mensaje) {
+       return true;
+   }
+   //Detectamos si el usuario denegó el mensaje
+   else {
+       return false;
+   }
+}
+</script>
 </head>
 
 <body>
@@ -55,7 +68,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Sistema de Farmacias ChillÃ¡n</a>
+                <a class="navbar-brand" href="index.html">Sistema de Farmacias Chillán</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -88,20 +101,13 @@
                         <li>
                             <a href="#"><i class="fa fa-medkit fa-fw"></i> Medicamentos<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                 <li>
+                                <li>
                                    <a href="verMedicamentos">Ver</a>
                                 </li>
                                 <li>
                                     <a href="agregar-medicamentos.jsp">Agregar</a>
                                 </li>
-								<li>
-                                    <a href="modificar-medicamentos.jsp">Modificar</a>
-                                </li>
-								<li>
-                                    <a href="eliminar-medicamentos.jsp">Eliminar</a>
-                                </li>
-								
-                            </ul>
+								</ul>
                             <!-- /.nav-second-level -->
                         </li>
 						<li>
@@ -119,7 +125,7 @@
 								<li>
                                     <a href="eliminar-farmacias.html">Eliminar</a>
                                 </li>
-								
+							
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -151,13 +157,8 @@
                                 <li>
                                     <a href="agregar-usuarios.jsp">Agregar</a>
                                 </li>
-								<li>
-                                    <a href="modificar-usuarios.jsp">Modificar</a>
-                                </li>
-								<li>
-                                    <a href="eliminar-usuarios.jsp">Eliminar</a>
-                                </li>
-						
+								
+								
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -194,7 +195,7 @@
                                         <th>Telefono</th>
                                         <th>Email</th>
                                         <th>Direccion</th>
-										<th> opciones </th>
+										<th>Opciones </th>
 										
                                     </tr>
                                 </thead>
@@ -207,7 +208,7 @@
                                         <th>${user.telefono}</th>
                                         <th>${user.correo}</th>
                                         <th>${user.direccion}</th>
-										<td><a href="edituser?id=${user.idUsuario}" class="btn btn-success">Editar</a> <a href="deleteuser?id=${user.idUsuario}" class="btn btn-danger">Eliminar</a></td>
+										<td><a href="edituser?id=${user.idUsuario}" class="btn btn-success">Editar</a> <a href="deleteuser?id=${user.idUsuario}"  onclick="return validar();" class="btn btn-danger">Eliminar</a></td>
                                     </tr>
                                     </c:forEach>                                   
                                 </tbody>

@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sistema de Farmacias Chillán</title>
+    <title>Sistema de Farmacias Chill�n</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -97,7 +97,7 @@ function checkRut(rut) {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Sistema de Farmacias Chillán</a>
+                <a class="navbar-brand" href="index.html">Sistema de Farmacias Chill�n</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -130,19 +130,13 @@ function checkRut(rut) {
                         <li>
                             <a href="#"><i class="fa fa-medkit fa-fw"></i> Medicamentos<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="ver-medicamentos.html">Ver</a>
+                               <li>
+                                   <a href="verMedicamentos">Ver</a>
                                 </li>
                                 <li>
-                                    <a href="agregar-medicamentos.html">Agregar</a>
+                                    <a href="agregar-medicamentos.jsp">Agregar</a>
                                 </li>
-								<li>
-                                    <a href="modificar-medicamentos.html">Modificar</a>
-                                </li>
-								<li>
-                                    <a href="eliminar-medicamentos.html">Eliminar</a>
-                                </li>
-								
+							
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -161,7 +155,7 @@ function checkRut(rut) {
 								<li>
                                     <a href="eliminar-farmacias.html">Eliminar</a>
                                 </li>
-								
+							
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -187,18 +181,14 @@ function checkRut(rut) {
 						<li>
                             <a href="#"><i class="fa fa-users fa-fw"></i> Usuarios<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                  <li>
-                                    <a href="ver-usuarios.jsp">Ver</a>
+                                <li>
+                                    <a href="verUsuarios">Ver</a>
                                 </li>
                                 <li>
                                     <a href="agregar-usuarios.jsp">Agregar</a>
                                 </li>
-								<li>
-                                    <a href="modificar-usuarios.jsp">Modificar</a>
-                                </li>
-								<li>
-                                    <a href="eliminar-usuarios.jsp">Eliminar</a>
-                                </li>
+							
+								
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -221,35 +211,35 @@ function checkRut(rut) {
                                         
                                         <div class="form-group">
                                             <label>Nombres</label>
-                                            <input class="form-control" value="${user.nombre}" placeholder="Ingrese su nombre" name="nombres-usuarios" id="">
+                                            <input class="form-control" required value="${user.nombre}" placeholder="Ingrese su nombre" name="nombres-usuarios" id="">
                                         </div>
 										<div class="form-group">
                                             <label>Apellido Paterno</label>
-                                            <input class="form-control" value="${user.apellidoPaterno}" placeholder="Ingrese su apellido paterno" name="apellido-paterno-usuarios" id="">
+                                            <input class="form-control" required value="${user.apellidoPaterno}" placeholder="Ingrese su apellido paterno" name="apellido-paterno-usuarios" id="">
                                         </div>
 										<div class="form-group">
                                             <label>Apellido Materno</label>
-                                            <input class="form-control" value="${user.apellidoMaterno}" placeholder="Ingrese su apellido materno" name="apellido-materno-usuarios" id="">
+                                            <input class="form-control" required value="${user.apellidoMaterno}" placeholder="Ingrese su apellido materno" name="apellido-materno-usuarios" id="">
                                         </div>
 										<div class="form-group">
                                             <label>Rut</label>
-                                            <input class="form-control" value="${user.rut}" oninput=" return checkRut(this)" placeholder="Ingrese su rut" name="rut-usuarios" id="">
+                                            <input class="form-control" required value="${user.rut}" oninput=" return checkRut(this)" placeholder="Ingrese su rut" name="rut-usuarios" id="">
                                         </div>
 										<div class="form-group">
                                             <label>Correo Electronico</label>
-                                            <input class="form-control" value="${user.correo}" placeholder="Ingrese su correo electronico" name="email-usuarios" id="">
+                                            <input class="form-control" required value="${user.correo}" placeholder="Ingrese su correo electronico" name="email-usuarios" id="">
                                         </div>
 								        <div class="form-group">
                                             <label>Dirección</label>
-                                            <input class="form-control" value="${user.direccion}" placeholder="Ingrese su dirección" name="direccion-usuarios" id="">
+                                            <input class="form-control" required value="${user.direccion}" placeholder="Ingrese su dirección" name="direccion-usuarios" id="">
                                         </div>                                
                                         <div class="form-group">
                                             <label>Telefono</label>
-                                            <input class="form-control" value="${user.telefono}" placeholder="Ingrese su numero telefonico" name="telefono-usuarios" id="">
+                                            <input class="form-control" required  minlength="8" value="${user.telefono}" placeholder="Ingrese su numero telefonico" name="telefono-usuarios" id="">
                                         </div>
 										<div class="form-group">
-                                            <label>Contraseña</label>
-                                            <input class="form-control" value="${user.clave}" placeholder="Ingrese su contraseña" type="password" name="contrasena-usuarios" id="">
+                                            <label>Contrase�a</label>
+                                            <input class="form-control" required  minlength="8" value="${user.clave}" placeholder="Ingrese su contraseña" type="password" name="contrasena-usuarios" id="">
                                         </div>
                                                                                     <input class="form-control" type="hidden" value="${user.idUsuario}" placeholder="Ingrese su contraseña" name="id" id="">
                                         

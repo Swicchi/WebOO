@@ -62,11 +62,8 @@ public class FarmaciaController {
 		
 		UsuarioDAO userDao = new UsuarioDAO();
 		int result =userDao.create(user);
-		if(result ==1) {
-		model.addAttribute("name",nombre);
-		model.addAttribute("app",app);
-		model.addAttribute("apm",apm);
-		this.verUsuarios(model);
+		if(result == 1) {
+		return verUsuarios(model);
 		}
 		return "agregar-usuarios.jsp";
 	}

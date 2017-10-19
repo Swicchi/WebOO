@@ -86,13 +86,7 @@
                                 <li>
                                     <a href="agregar-medicamentos.jsp">Agregar</a>
                                 </li>
-								<li>
-                                    <a href="modificar-medicamentos.jsp">Modificar</a>
-                                </li>
-								<li>
-                                    <a href="eliminar-medicamentos.jsp">Eliminar</a>
-                                </li>
-							
+								
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -130,25 +124,20 @@
 								<li>
                                     <a href="eliminar-administradores.html">Eliminar</a>
                                 </li>
-							
+								
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
 						<li>
                             <a href="#"><i class="fa fa-users fa-fw"></i> Usuarios<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                 <li>
+                                <li>
                                     <a href="verUsuarios">Ver</a>
                                 </li>
                                 <li>
                                     <a href="agregar-usuarios.jsp">Agregar</a>
                                 </li>
-								<li>
-                                    <a href="modificar-usuarios.jsp">Modificar</a>
-                                </li>
-								<li>
-                                    <a href="eliminar-usuarios.jsp">Eliminar</a>
-                                </li>
+								
 						
                             </ul>
                             <!-- /.nav-second-level -->
@@ -172,7 +161,7 @@
                                         
                                         <div class="form-group">
                                             <label>Nombre del medicamento</label>
-                                            <input class="form-control" placeholder="Ingrese el nombre" name="nombres-medicamentos" id="">
+                                            <input class="form-control" required placeholder="Ingrese el nombre" name="nombres-medicamentos" id="">
                                         </div>
 										<!-- <div class="form-group">
                                             <label>Precio</label>
