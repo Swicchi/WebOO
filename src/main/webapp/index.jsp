@@ -78,19 +78,18 @@
                         <li>
                             <a href="#"><i class="fa fa-medkit fa-fw"></i> Medicamentos<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="ver-medicamentos.html">Ver</a>
+                                 <li>
+                                   <a href="verMedicamentos">Ver</a>
                                 </li>
                                 <li>
-                                    <a href="agregar-medicamentos.html">Agregar</a>
+                                    <a href="agregar-medicamentos.jsp">Agregar</a>
                                 </li>
 								<li>
-                                    <a href="modificar-medicamentos.html">Modificar</a>
+                                    <a href="modificar-medicamentos.jsp">Modificar</a>
                                 </li>
 								<li>
-                                    <a href="eliminar-medicamentos.html">Eliminar</a>
+                                    <a href="eliminar-medicamentos.jsp">Eliminar</a>
                                 </li>
-								
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -136,7 +135,7 @@
                             <a href="#"><i class="fa fa-users fa-fw"></i> Usuarios<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="ver-usuarios.jsp">Ver</a>
+                                    <a href="verUsuarios">Ver</a>
                                 </li>
                                 <li>
                                     <a href="agregar-usuarios.jsp">Agregar</a>

@@ -98,6 +98,7 @@ public class UsuarioDAO {
 				result.setApellidoPaterno(rs.getString("apellidoPaterno"));
 				result.setApellidoMaterno(rs.getString("apellidoMaterno"));
 				result.setTelefono(rs.getInt("telefono"));
+				result.setIdUsuario(rs.getInt("idUsuario"));
 				result.setDireccion(rs.getString("direccion"));
 				result.setCorreo(rs.getString("correo"));
 				list.add(result);
@@ -127,6 +128,7 @@ public class UsuarioDAO {
 				result.setApellidoPaterno(rs.getString("apellidoPaterno"));
 				result.setApellidoMaterno(rs.getString("apellidoMaterno"));
 				result.setTelefono(rs.getInt("telefono"));
+				result.setIdUsuario(rs.getInt("idUsuario"));
 				result.setDireccion(rs.getString("direccion"));
 				result.setCorreo(rs.getString("correo"));
 			}
@@ -184,6 +186,7 @@ public class UsuarioDAO {
 				result.setApellidoPaterno(rs.getString("apellidoPaterno"));
 				result.setApellidoMaterno(rs.getString("apellidoMaterno"));
 				result.setTelefono(rs.getInt("telefono"));
+				result.setIdUsuario(rs.getInt("idUsuario"));
 				result.setDireccion(rs.getString("direccion"));
 				result.setCorreo(rs.getString("correo"));
 			}

@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
+   <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 
@@ -86,17 +88,17 @@
                         <li>
                             <a href="#"><i class="fa fa-medkit fa-fw"></i> Medicamentos<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="ver-medicamentos.html">Ver</a>
+                                 <li>
+                                   <a href="verMedicamentos">Ver</a>
                                 </li>
                                 <li>
-                                    <a href="agregar-medicamentos.html">Agregar</a>
+                                    <a href="agregar-medicamentos.jsp">Agregar</a>
                                 </li>
 								<li>
-                                    <a href="modificar-medicamentos.html">Modificar</a>
+                                    <a href="modificar-medicamentos.jsp">Modificar</a>
                                 </li>
 								<li>
-                                    <a href="eliminar-medicamentos.html">Eliminar</a>
+                                    <a href="eliminar-medicamentos.jsp">Eliminar</a>
                                 </li>
 								
                             </ul>
@@ -144,7 +146,7 @@
                             <a href="#"><i class="fa fa-users fa-fw"></i> Usuarios<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                  <li>
-                                    <a href="ver-usuarios.jsp">Ver</a>
+                                    <a href="verUsuarios.jsp">Ver</a>
                                 </li>
                                 <li>
                                     <a href="agregar-usuarios.jsp">Agregar</a>
@@ -184,25 +186,29 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>Rendering engine</th>
-                                        <th>Browser</th>
-                                        <th>Platform(s)</th>
-                                        <th>Engine version</th>
-                                        <th>CSS grade</th>
+                                    
+                                        <th>Rut</th>
+                                        <th>Nombre</th>
+                                        <th>Apellidos</th>
+                                        <th>Telefono</th>
+                                        <th>Email</th>
+                                        <th>Direccion</th>
 										<th> opciones </th>
 										
                                     </tr>
                                 </thead>
                                 <tbody>
+                                 <c:forEach var="user" items="${list}">  
                                     <tr class="odd gradeX">
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 4.0</td>
-                                        <td>Win 95+</td>
-                                        <td class="center">4</td>
-                                        <td class="center">X</td>
-										<td><a href="submit" class="btn btn-success">Editar</a> <a href="submit" class="btn btn-danger">Eliminar</a></td>
+                                        <th>${user.rut}</th>
+                                        <th>${user.nombre}</th>
+                                        <th>${user.apellidoPaterno} ${user.apellidoMaterno}</th>
+                                        <th>${user.telefono}</th>
+                                        <th>${user.correo}</th>
+                                        <th>${user.direccion}</th>
+										<td><a href="edituser/${user.idUsuario}" class="btn btn-success">Editar</a> <a href="deleteuser/${user.idUsuario}" class="btn btn-danger">Eliminar</a></td>
                                     </tr>
-                                                                       
+                                    </c:forEach>                                   
                                 </tbody>
                             </table>
                             <!-- /.table-responsive -->

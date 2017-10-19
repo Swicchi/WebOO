@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
+   <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%> <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,16 +15,16 @@
     <title>Sistema de Farmacias Chillán</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -79,18 +82,17 @@
                             <a href="#"><i class="fa fa-medkit fa-fw"></i> Medicamentos<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="ver-medicamentos.html">Ver</a>
+                                    <a href="ver-medicamentos.jsp">Ver</a>
                                 </li>
                                 <li>
-                                    <a href="agregar-medicamentos.html">Agregar</a>
+                                    <a href="agregar-medicamentos.jsp">Agregar</a>
                                 </li>
 								<li>
-                                    <a href="modificar-medicamentos.html">Modificar</a>
+                                    <a href="modificar-medicamentos.jsp">Modificar</a>
                                 </li>
 								<li>
-                                    <a href="eliminar-medicamentos.html">Eliminar</a>
+                                    <a href="eliminar-medicamentos.jsp">Eliminar</a>
                                 </li>
-								
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -168,18 +170,11 @@
                     <!-- /.col-lg-12 -->
 					<form role="form">
                                         
-                                        <div class="form-group">
+                                        <div class="form-group" action="modMedic" method="post">
                                             <label>Nombre del medicamento</label>
-                                            <input class="form-control" placeholder="Ingrese el nombre" name="nombres-medicamentos" id="">
+                                            <input class="form-control" value="${med.nombre}" placeholder="Ingrese el nombre" name="nombres-medicamentos" id="">
                                         </div>
-										<div class="form-group">
-                                            <label>Precio</label>
-                                            <input class="form-control" placeholder="Ingrese el precio" name="precio-medicamentos" id="">
-                                        </div>
-										<div class="form-group">
-                                            <label>Stock del medicamento</label>
-                                            <input class="form-control" placeholder="Ingrese el stock" name="stock-medicamentos" id="">
-                                        </div>
+										 <input class="form-control" value="${med.idMedicamento}" placeholder="Ingrese el nombre" type="hidden" name="id" id="">
 										<button type="submit" class="btn btn-default">Enviar</button>
                                         <button type="reset" class="btn btn-default">Borrar todo el formulario</button>
                                     </form>
@@ -195,16 +190,16 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+    <script src="vendor/metisMenu/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
+    <script src="dist/js/sb-admin-2.js"></script>
 
 </body>
 

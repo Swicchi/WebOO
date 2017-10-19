@@ -196,7 +196,7 @@
                                         </div>                                
                                         <div class="form-group">
                                             <label>Telefono</label>
-                                            <input class="form-control" type="number" placeholder="Ingrese su numero telefonico" name="telefono-usuarios" id="">
+                                            <input class="form-control" maxlength="11" type="number" placeholder="Ingrese su numero telefonico" name="telefono-usuarios" id="">
                                         </div>
 										<div class="form-group">
                                             <label>Contraseña</label>

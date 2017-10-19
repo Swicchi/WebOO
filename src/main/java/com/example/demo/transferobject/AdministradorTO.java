@@ -10,6 +10,7 @@ public class AdministradorTO {
 	private int telefono;
 	private String direccion;
 	private String correo;
+	private int idFarmacia;
 	public int getIdAdministrador() {
 		return idAdministrador;
 	}
