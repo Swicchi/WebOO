@@ -105,7 +105,7 @@ function validar(){
                                    <a href="verMedicamentos">Ver</a>
                                 </li>
                                 <li>
-                                    <a href="agregar-medicamentos.jsp">Agregar</a>
+                                    <a href="agregarMedicamentos">Agregar</a>
                                 </li>
 								</ul>
                             <!-- /.nav-second-level -->
@@ -155,7 +155,7 @@ function validar(){
                                     <a href="verUsuarios">Ver</a>
                                 </li>
                                 <li>
-                                    <a href="agregar-usuarios.jsp">Agregar</a>
+                                    <a href="agregarUsuarios">Agregar</a>
                                 </li>
 								
 								

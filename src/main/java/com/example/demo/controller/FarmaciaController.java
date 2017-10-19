@@ -41,6 +41,14 @@ public class FarmaciaController {
 	public String registro() {
 		return "agregar-usuarios.jsp";
 	}
+	@RequestMapping(value = "/agregarUsuarios")
+	public String agregarUser() {
+		return "agregar-usuarios.jsp";
+	}
+	@RequestMapping(value = "/agregarMedicamentos")
+	public String agregarMedicamentos() {
+		return "agregar-medicamentos.jsp";
+	}
 	@RequestMapping(value= "/addUser", method= RequestMethod.POST)
 	public String addUser(@RequestParam(value="nombres-usuarios", required=false, defaultValue="World") String nombre,
 			@RequestParam(value="apellido-paterno-usuarios",	required=false, defaultValue="World") String app,

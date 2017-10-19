@@ -132,7 +132,7 @@ function checkRut(rut) {
                                    <a href="verMedicamentos">Ver</a>
                                 </li>
                                 <li>
-                                    <a href="agregar-medicamentos.jsp">Agregar</a>
+                                    <a href="agregarMedicamentos">Agregar</a>
                                 </li>
 								
                             </ul>
@@ -183,7 +183,7 @@ function checkRut(rut) {
                                     <a href="verUsuarios">Ver</a>
                                 </li>
                                 <li>
-                                    <a href="agregar-usuarios.jsp">Agregar</a>
+                                    <a href="agregarUsuarios">Agregar</a>
                                 </li>
 								
 						
