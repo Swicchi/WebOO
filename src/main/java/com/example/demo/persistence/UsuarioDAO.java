@@ -1,6 +1,6 @@
 package com.example.demo.persistence;
 
-import com.example.demo.transferobject.AdministradorTO;
+import com.example.demo.transferobject.UsuarioTO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -29,20 +29,20 @@ public class UsuarioDAO {
 	private static final String PASSWORD = "";
 	private static Connection conexion = null;
 
-	public int create(AdministradorTO admin) throws SQLException {
+	public int create(UsuarioTO user) throws SQLException {
 
 		int result = 0;
 		try {
 			conexion = getConnection();
 			PreparedStatement ps = conexion.prepareStatement(INSERT_QUERY);
-			ps.setString(1, admin.getRut());
-			ps.setString(2, admin.getClave());
-			ps.setString(3, admin.getNombre());
-			ps.setString(4, admin.getApellidoPaterno());
-			ps.setString(5, admin.getApellidoMaterno());
-			ps.setInt(6, admin.getTelefono());
-			ps.setString(7, admin.getDireccion());
-			ps.setString(8, admin.getCorreo());
+			ps.setString(1, user.getRut());
+			ps.setString(2, user.getClave());
+			ps.setString(3, user.getNombre());
+			ps.setString(4, user.getApellidoPaterno());
+			ps.setString(5, user.getApellidoMaterno());
+			ps.setInt(6, user.getTelefono());
+			ps.setString(7, user.getDireccion());
+			ps.setString(8, user.getCorreo());
 			ps.executeUpdate();
 			result = 1;
 		} catch (SQLException e) {
@@ -55,21 +55,21 @@ public class UsuarioDAO {
 		return result;
 	}
 
-	public int update(AdministradorTO admin) throws SQLException {
+	public int update(UsuarioTO user) throws SQLException {
 
 		int result = 0;
 		try {
 			conexion = getConnection();
 			PreparedStatement ps = conexion.prepareStatement(UPDATE_QUERY);
-			ps.setString(1, admin.getRut());
-			ps.setString(2, admin.getClave());
-			ps.setString(3, admin.getNombre());
-			ps.setString(4, admin.getApellidoPaterno());
-			ps.setString(5, admin.getApellidoMaterno());
-			ps.setInt(6, admin.getTelefono());
-			ps.setString(7, admin.getDireccion());
-			ps.setString(8, admin.getCorreo());
-			ps.setInt(9, admin.getIdAdministrador());
+			ps.setString(1, user.getRut());
+			ps.setString(2, user.getClave());
+			ps.setString(3, user.getNombre());
+			ps.setString(4, user.getApellidoPaterno());
+			ps.setString(5, user.getApellidoMaterno());
+			ps.setInt(6, user.getTelefono());
+			ps.setString(7, user.getDireccion());
+			ps.setString(8, user.getCorreo());
+			ps.setInt(9, user.getIdUsuario());
 			ps.executeUpdate();
 			result = 1;
 		} catch (SQLException e) {
@@ -82,16 +82,16 @@ public class UsuarioDAO {
 		return result;
 	}
 
-	public LinkedList<AdministradorTO> readAll() throws SQLException {
-		LinkedList<AdministradorTO> list = new LinkedList<>();
-		AdministradorTO result = null;
+	public LinkedList<UsuarioTO> readAll() throws SQLException {
+		LinkedList<UsuarioTO> list = new LinkedList<>();
+		UsuarioTO result = null;
 
 		try {
 			conexion = getConnection();
 			PreparedStatement ps = conexion.prepareStatement(READ_ALL);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				result = new AdministradorTO();
+				result = new UsuarioTO();
 				result.setRut(rs.getString("rut"));
 				result.setClave(rs.getString("clave"));
 				result.setNombre(rs.getString("nombre"));
@@ -103,7 +103,7 @@ public class UsuarioDAO {
 				list.add(result);
 			}
 		} catch (SQLException ex) {
-			Logger.getLogger(AdministradorTO.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(UsuarioTO.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {
 			if (conexion != null)
 				conexion.close();
@@ -111,16 +111,16 @@ public class UsuarioDAO {
 		return list;
 	}
 
-	public AdministradorTO read(AdministradorTO admin) throws SQLException {
-		AdministradorTO result = null;
+	public UsuarioTO read(UsuarioTO user) throws SQLException {
+		UsuarioTO result = null;
 
 		try {
 			conexion = getConnection();
 			PreparedStatement ps = conexion.prepareStatement(READ_QUERY);
-			ps.setInt(1, admin.getIdAdministrador());
+			ps.setInt(1, user.getIdUsuario());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				result = new AdministradorTO();
+				result = new UsuarioTO();
 				result.setRut(rs.getString("rut"));
 				result.setClave(rs.getString("clave"));
 				result.setNombre(rs.getString("nombre"));
@@ -131,19 +131,19 @@ public class UsuarioDAO {
 				result.setCorreo(rs.getString("correo"));
 			}
 		} catch (SQLException ex) {
-			Logger.getLogger(AdministradorTO.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(UsuarioTO.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {
 			conexion.close();
 		}
 		return result;
 	}
 
-	public boolean delete(AdministradorTO admin) throws SQLException {
+	public boolean delete(UsuarioTO user) throws SQLException {
 		boolean resultado = false;
 		try {
 			conexion = getConnection();
 			PreparedStatement ps = conexion.prepareStatement(DELETE_QUERY);
-			ps.setInt(1, admin.getIdAdministrador());
+			ps.setInt(1, user.getIdUsuario());
 			ps.executeUpdate();
 			resultado = true;
 		} catch (SQLException e) {
@@ -166,18 +166,18 @@ public class UsuarioDAO {
 		return conexion;
 	}
 
-	public AdministradorTO login(AdministradorTO admin) throws SQLException {
+	public UsuarioTO login(UsuarioTO user) throws SQLException {
 		// TODO Auto-generated method stub
-		AdministradorTO result = null;
+		UsuarioTO result = null;
 
 		try {
 			conexion = getConnection();
 			PreparedStatement ps = conexion.prepareStatement(LOGIN);
-			ps.setString(1, admin.getCorreo());
-			ps.setString(2, admin.getClave());
+			ps.setString(1, user.getCorreo());
+			ps.setString(2, user.getClave());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				result = new AdministradorTO();
+				result = new UsuarioTO();
 				result.setRut(rs.getString("rut"));
 				result.setClave(rs.getString("clave"));
 				result.setNombre(rs.getString("nombre"));
@@ -188,7 +188,7 @@ public class UsuarioDAO {
 				result.setCorreo(rs.getString("correo"));
 			}
 		} catch (SQLException ex) {
-			Logger.getLogger(AdministradorTO.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(UsuarioTO.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {
 			conexion.close();
 		}

@@ -39,4 +39,33 @@ public class FarmaciaController {
 	public String registro() {
 		return "agregar-usuarios.jsp";
 	}
+	@RequestMapping(value= "/addUser", method= RequestMethod.POST)
+	public String addUser(@RequestParam(value="nombres-usuarios", required=false, defaultValue="World") String nombre,
+			@RequestParam(value="apellido-paterno-usuarios",	required=false, defaultValue="World") String app,
+			@RequestParam(value="apellido-materno-usuarios",	required=false, defaultValue="World") String apm,
+			@RequestParam(value="rut-usuarios",	required=false, defaultValue="World") String rut,
+			@RequestParam(value="email-usuarios",	required=false, defaultValue="World") String email,
+			@RequestParam(value="direccion-usuarios",	required=false, defaultValue="World") String dir,
+			@RequestParam(value="telefono-usuarios",	required=false, defaultValue="World") int tel,
+			@RequestParam(value="contrasena-usuarios",	required=false, defaultValue="World") String pass,Model model) throws SQLException {
+		UsuarioTO user= new UsuarioTO();
+		user.setCorreo(email);
+		user.setClave(pass);
+		user.setRut(rut);
+		user.setNombre(nombre);
+		user.setApellidoPaterno(app);
+		user.setApellidoMaterno(apm);
+		user.setTelefono(tel);
+		user.setDireccion(dir);
+		
+		UsuarioDAO userDao = new UsuarioDAO();
+		int result =userDao.create(user);
+		if(result ==1) {
+		model.addAttribute("name",nombre);
+		model.addAttribute("app",app);
+		model.addAttribute("apm",apm);
+		return "ver-usuarios.jsp";
+		}
+		return "agregar-usuarios.jsp";
+	}
 }

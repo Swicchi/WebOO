@@ -137,19 +137,18 @@
 						<li>
                             <a href="#"><i class="fa fa-users fa-fw"></i> Usuarios<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="ver-usuarios.html">Ver</a>
+                                  <li>
+                                    <a href="ver-usuarios.jsp">Ver</a>
                                 </li>
                                 <li>
-                                    <a href="agregar-usuarios.html">Agregar</a>
+                                    <a href="agregar-usuarios.jsp">Agregar</a>
                                 </li>
 								<li>
-                                    <a href="modificar-usuarios.html">Modificar</a>
+                                    <a href="modificar-usuarios.jsp">Modificar</a>
                                 </li>
 								<li>
-                                    <a href="eliminar-usuarios.html">Eliminar</a>
+                                    <a href="eliminar-usuarios.jsp">Eliminar</a>
                                 </li>
-								
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
