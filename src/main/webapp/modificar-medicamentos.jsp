@@ -168,9 +168,9 @@
                         <h1 class="page-header">Modificar medicamento</h1>
                     </div>
                     <!-- /.col-lg-12 -->
-					<form role="form">
+					<form role="form" action="modMedic" method="post">
                                         
-                                        <div class="form-group" action="modMedic" method="post">
+                                        <div class="form-group" >
                                             <label>Nombre del medicamento</label>
                                             <input class="form-control" value="${med.nombre}" placeholder="Ingrese el nombre" name="nombres-medicamentos" id="">
                                         </div>

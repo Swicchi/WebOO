@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class MedicamentoDAO {
 	private static final String INSERT_QUERY = "INSERT INTO `medicamento`( `nombre`) VALUES(?)";
 	private static final String DELETE_QUERY = "DELETE FROM `medicamento` WHERE idMedicamento=?";
-	private static final String UPDATE_QUERY = "UPDATE `medicamento` SET` `nombre`=?  WHERE idMedicamento=? ";
+	private static final String UPDATE_QUERY = "UPDATE `medicamento` SET `nombre`=? WHERE `idMedicamento`=?";
 	private static final String READ_QUERY = "SELECT * FROM `medicamento` where idMedicamento=?";
 	private static final String READ_ALL = "SELECT * FROM `medicamento`";
 	private static final String DB_NAME = "farmacia";
@@ -35,7 +35,6 @@ public class MedicamentoDAO {
 			conexion = getConnection();
 			PreparedStatement 	ps = conexion.prepareStatement(INSERT_QUERY);
 			ps.setString(1, medicamento.getNombre());
-			
 			ps.executeUpdate();
 			result = 1;
 		} catch (SQLException e) {

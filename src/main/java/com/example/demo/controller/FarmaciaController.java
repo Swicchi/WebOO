@@ -70,6 +70,34 @@ public class FarmaciaController {
 		}
 		return "agregar-usuarios.jsp";
 	}
+	@RequestMapping(value= "/modUser", method= RequestMethod.POST)
+	public String moduser(@RequestParam(value="nombres-usuarios", required=false, defaultValue="World") String nombre,
+			@RequestParam(value="apellido-paterno-usuarios",	required=false, defaultValue="World") String app,
+			@RequestParam(value="apellido-materno-usuarios",	required=false, defaultValue="World") String apm,
+			@RequestParam(value="rut-usuarios",	required=false, defaultValue="World") String rut,
+			@RequestParam(value="email-usuarios",	required=false, defaultValue="World") String email,
+			@RequestParam(value="direccion-usuarios",	required=false, defaultValue="World") String dir,
+			@RequestParam(value="telefono-usuarios",	required=false, defaultValue="World") int tel,
+			@RequestParam(value="id",	required=false, defaultValue="World") int id,
+			@RequestParam(value="contrasena-usuarios",	required=false, defaultValue="World") String pass,Model model) throws SQLException {
+		UsuarioTO user= new UsuarioTO();
+		user.setCorreo(email);
+		user.setClave(pass);
+		user.setRut(rut);
+		user.setNombre(nombre);
+		user.setApellidoPaterno(app);
+		user.setApellidoMaterno(apm);
+		user.setTelefono(tel);
+		user.setDireccion(dir);
+		user.setIdUsuario(id);
+		
+		UsuarioDAO userDao = new UsuarioDAO();
+		int result =userDao.update(user);
+		if(result ==1) {
+		return this.verUsuarios(model);
+		}
+		return moduser(nombre,app,apm,rut,email,dir,tel,id,pass,model);
+	}
 	@RequestMapping(value= "/addMedic", method= RequestMethod.POST)
 	public String addMedicamento(@RequestParam(value="nombres-medicamentos", required=false, defaultValue="World") String nombre,Model model) throws SQLException {
 		MedicamentoTO med= new MedicamentoTO();
@@ -78,8 +106,7 @@ public class FarmaciaController {
 		MedicamentoDAO medDao = new MedicamentoDAO();
 		int result =medDao.create(med);
 		if(result ==1) {
-		model.addAttribute("name",nombre);
-		this.verMedicamento(model);
+		return verMedicamento(model);
 		}
 		return "agregar-medicamentos.jsp";
 	}
@@ -91,11 +118,10 @@ public class FarmaciaController {
 		MedicamentoDAO medDao = new MedicamentoDAO();
 		int result =medDao.update(med);
 		if(result ==1) {
-		model.addAttribute("name",nombre);
-		this.verMedicamento(model);
+		return verMedicamento(model);
 		}
 		model.addAttribute("med",med);
-		return "modificar-medicamentos.jsp";
+		return editarMedicamento(id,model);
 	}
 	@RequestMapping(value= "/verMedicamentos")
 	public String verMedicamento(Model model) throws SQLException {
@@ -121,8 +147,8 @@ public class FarmaciaController {
 		}
 		return "ver-usuarios.jsp";
 	}
-	@RequestMapping(value= "/editmed/{id}")
-	public String editarMedicamento(@PathVariable int id,Model model) throws SQLException {
+	@RequestMapping(value= "/editmed", method= RequestMethod.GET)
+	public String editarMedicamento(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
 		MedicamentoTO med= new MedicamentoTO();
 		med.setIdMedicamento(id);
 		MedicamentoDAO medDao = new MedicamentoDAO();
@@ -132,5 +158,40 @@ public class FarmaciaController {
 		return "modificar-medicamentos.jsp";
 		}
 		return "modificar-medicamentos.jsp";
+	}
+	@RequestMapping(value= "/deletemed", method= RequestMethod.GET)
+	public String eliminarMedicamento(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
+		MedicamentoTO med= new MedicamentoTO();
+		med.setIdMedicamento(id);
+		MedicamentoDAO medDao = new MedicamentoDAO();
+		
+		if( medDao.delete(med)) {
+		return this.verMedicamento(model);
+		}
+		return this.verMedicamento(model);
+	}
+	@RequestMapping(value= "/edituser", method= RequestMethod.GET)
+	public String editarUser(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
+		UsuarioTO user= new UsuarioTO();
+		user.setIdUsuario(id);
+		UsuarioDAO userDao = new UsuarioDAO();
+		user = userDao.read(user);
+		if(user!=null) {
+		model.addAttribute("user",user);
+		return "modificar-usuarios.jsp";
+		}
+		return "modificar-usuarios.jsp";
+	}
+	@RequestMapping(value= "/deleteuser", method= RequestMethod.GET)
+	public String eliminarUser(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
+		UsuarioTO user= new UsuarioTO();
+		user.setIdUsuario(id);
+		UsuarioDAO userDao = new UsuarioDAO();
+		
+		
+		if( userDao.delete(user)) {
+		return this.verUsuarios(model);
+		}
+		return this.verUsuarios(model);
 	}
 }

@@ -138,7 +138,7 @@
                             <a href="#"><i class="fa fa-users fa-fw"></i> Usuarios<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                  <li>
-                                    <a href="verUsuarios.jsp">Ver</a>
+                                    <a href="verUsuarios">Ver</a>
                                 </li>
                                 <li>
                                     <a href="agregar-usuarios.jsp">Agregar</a>

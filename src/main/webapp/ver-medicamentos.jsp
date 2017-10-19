@@ -144,7 +144,7 @@
 						<li>
                             <a href="#"><i class="fa fa-users fa-fw"></i> Usuarios<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                  <li>
+                                <li>
                                     <a href="verUsuarios">Ver</a>
                                 </li>
                                 <li>
@@ -156,6 +156,7 @@
 								<li>
                                     <a href="eliminar-usuarios.jsp">Eliminar</a>
                                 </li>
+						
 								
                             </ul>
                             <!-- /.nav-second-level -->
@@ -195,7 +196,7 @@
                                  <c:forEach var="medicamento" items="${list}">  
                                     <tr class="odd gradeX">
                                         <td>${medicamento.nombre}</td> 
-										<td><a href="editmed/${medicamento.idMedicamento}"  class="btn btn-success">Editar</a> <a href="deletemed/${medicamento.idMedicamento}" class="btn btn-danger">Eliminar</a></td>
+										<td><a href="editmed?id=${medicamento.idMedicamento}"  class="btn btn-success">Editar</a> <a href="deletemed?id=${medicamento.idMedicamento}" class="btn btn-danger">Eliminar</a></td>
                                     </tr>
                                  </c:forEach>                                   
                                 </tbody>

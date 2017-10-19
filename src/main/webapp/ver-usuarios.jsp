@@ -145,8 +145,8 @@
 						<li>
                             <a href="#"><i class="fa fa-users fa-fw"></i> Usuarios<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                 <li>
-                                    <a href="verUsuarios.jsp">Ver</a>
+                                <li>
+                                    <a href="verUsuarios">Ver</a>
                                 </li>
                                 <li>
                                     <a href="agregar-usuarios.jsp">Agregar</a>
@@ -157,6 +157,7 @@
 								<li>
                                     <a href="eliminar-usuarios.jsp">Eliminar</a>
                                 </li>
+						
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -206,7 +207,7 @@
                                         <th>${user.telefono}</th>
                                         <th>${user.correo}</th>
                                         <th>${user.direccion}</th>
-										<td><a href="edituser/${user.idUsuario}" class="btn btn-success">Editar</a> <a href="deleteuser/${user.idUsuario}" class="btn btn-danger">Eliminar</a></td>
+										<td><a href="edituser?id=${user.idUsuario}" class="btn btn-success">Editar</a> <a href="deleteuser?id=${user.idUsuario}" class="btn btn-danger">Eliminar</a></td>
                                     </tr>
                                     </c:forEach>                                   
                                 </tbody>
