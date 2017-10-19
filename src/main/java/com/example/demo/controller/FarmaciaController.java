@@ -30,9 +30,6 @@ public class FarmaciaController {
 		AdministradorDAO adminDao = new AdministradorDAO();
 		AdministradorTO result =adminDao.login(admin);
 		if(result!=null) {
-		model.addAttribute("name",result.getNombre());
-		model.addAttribute("app",result.getApellidoPaterno());
-		model.addAttribute("apm",result.getApellidoMaterno());
 		return "index.jsp";
 		}
 		return "login.jsp";

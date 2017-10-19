@@ -230,7 +230,7 @@ function checkRut(rut) {
                                             <input class="form-control" required value="${user.correo}" placeholder="Ingrese su correo electronico" name="email-usuarios" id="">
                                         </div>
 								        <div class="form-group">
-                                            <label>Dirección</label>
+                                            <label>Direcci�n</label>
                                             <input class="form-control" required value="${user.direccion}" placeholder="Ingrese su dirección" name="direccion-usuarios" id="">
                                         </div>                                
                                         <div class="form-group">
