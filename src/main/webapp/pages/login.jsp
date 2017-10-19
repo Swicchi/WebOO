@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,16 +44,18 @@
                         <h3 class="panel-title">Inicio de sesión</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form">
+                        <form role="form" action="loginUser" method="post">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                    <input class="form-control" placeholder="E-mail" name="email" type="email" required autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Contraseña" name="password" type="password" value="">
+                                    <input class="form-control" placeholder="Contraseña" name="password" type="password" required value="">
                                 </div>
-                                <!-- Change this to a button or input when using this as a form -->
-                                <a href="index.html" class="btn btn-lg btn-success btn-block">Ingresar</a>
+                                <!-- Change this to a button or input when using this as a form -->   
+                                <button type="submit" class="btn btn-lg btn-success btn-block">Enviar</button>
+                                <button type="reset" class="btn btn-lg btn-success btn-block">Borrar todo el formulario</button>
+                                <a href="registroUsuario" class="btn btn-lg btn-success btn-block">Registrarse</a>
                             </fieldset>
                         </form>
                     </div>
@@ -59,6 +63,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- jQuery -->
     <script src="../vendor/jquery/jquery.min.js"></script>

@@ -20,7 +20,7 @@ public class AdministradorDAO {
 	private static final String DELETE_QUERY = "DELETE FROM `administrador` WHERE idAdministrador=?";
 	private static final String UPDATE_QUERY = "UPDATE `administrador` SET`rut`=?,`clave`=?,`nombre`=?,`apellidoPaterno`=?,`apellidoMaterno`=?,`telefono`=?,`direccion`=?,`correo`=? WHERE idAdministrador=? ";
 	private static final String READ_QUERY = "SELECT * FROM `administrador` where idAdministrador=?";
-	private static final String LOGIN = "SELECT * FROM `administrador` where `clave` = ? and correo = ? ";
+	private static final String LOGIN = "SELECT * FROM `administrador` where `correo` = ? and clave = ? ";
 	private static final String READ_ALL = "SELECT * FROM `administrador`";
 	private static final String DB_NAME = "farmacia";
 	private static final String PORT = "3306";

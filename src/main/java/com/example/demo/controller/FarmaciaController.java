@@ -9,14 +9,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.persistence.*;
 import com.example.demo.transferobject.*;
+import org.springframework.stereotype.Controller;
 
+
+@Controller
 public class FarmaciaController {
 	@RequestMapping(value = "/")
 	public String index() {
 		return "login.jsp";
 	}
 
-	@RequestMapping(value= "/loginAdmin", method= RequestMethod.GET)
+	@RequestMapping(value= "/loginAdmin", method= RequestMethod.POST)
 	public String greeting(@RequestParam(value="user", required=false, defaultValue="World") String correo,@RequestParam(value="pass",
 	required=false, defaultValue="World") String pass, Model model) throws SQLException {
 		AdministradorTO admin= new AdministradorTO();
@@ -34,6 +37,6 @@ public class FarmaciaController {
 	}
 	@RequestMapping(value = "/registroUsuario")
 	public String registro() {
-		return "registroUsuario.jsp";
+		return "agregar-usuarios.jsp";
 	}
 }

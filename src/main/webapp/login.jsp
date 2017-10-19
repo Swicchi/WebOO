@@ -40,18 +40,18 @@
                         <h3 class="panel-title">Inicio de sesión</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form" action="loginUser" method="post">
+                        <form role="form" action="loginAdmin" method="post">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="email" type="email" required autofocus>
+                                    <input class="form-control" placeholder="E-mail" name="user" type="email" required autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Contraseña" name="password" type="password" required value="">
+                                    <input class="form-control" placeholder="Contraseña" name="pass" type="password" required >
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->   
-                                <button type="submit" class="btn btn-default">Enviar</button>
-                                <button type="reset" class="btn btn-default">Borrar todo el formulario</button>
-                                <a href="registro" class="btn btn-lg btn-success btn-block">Registrarse</a>
+                                <button type="submit" class="btn btn-default btn-success btn-block">Enviar</button>
+                                <button type="reset" class="btn btn-default btn-danger btn-block">Borrar todo el formulario</button>
+                                <a href="registroUsuario" class="btn btn-lg btn-success btn-block ">Registrarse</a>
                             </fieldset>
                         </form>
                     </div>
