@@ -26,6 +26,13 @@ public class FarmaciaController {
 			model.addAttribute("list",farmacia);
 		
 		}
+		FarmaciaTO farmacia1 = farmaciaDao.readTurno();
+		if(farmacia1 != null) {
+			System.out.println("hay ");
+			model.addAttribute("turno",farmacia1.getNombre());
+		
+		}
+		
 		return "index";
 	}
 	@RequestMapping(value = "/inicio")
@@ -36,6 +43,12 @@ public class FarmaciaController {
 		farmacia = farmaciaDao.readAll();
 		if(farmacia.size() >0) {
 			model.addAttribute("list",farmacia);
+		
+		}
+		FarmaciaTO farmacia1 = farmaciaDao.readTurno();
+		if(farmacia1 != null) {
+			System.out.println("hay ");
+			model.addAttribute("turno",farmacia1.getNombre());
 		
 		}
 		return "index";

@@ -24,7 +24,13 @@
 					<header id="header">
 						<article id="intro">
 								<h2 class="major">${farmacia.nombre}</h2>
-								<p>${farmacia.ubicacion}</p>
+								<p>Ubicación:         ${farmacia.ubicacion}</p>
+								<p>Telefono Contacto: ${farmacia.telefono}</p>
+								<p>Hora Apertura:     ${farmacia.horaEntrada}</p>
+								<p>Hora Descanso:     ${farmacia.horaDescanso}</p>
+								<p>Hora Reanudación:  ${farmacia.horaReanudacion}</p>
+								<p>Hora Termino:      ${farmacia.horaSalida}</p>
+								
 								  <a href="inicio">X</a>
 						</article>
 					</header>

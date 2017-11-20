@@ -17,6 +17,7 @@ public class FarmaciaDAO {
 	private static final String DELETE_QUERY = "DELETE FROM `farmacia` WHERE idFarmacia=?";
 	private static final String UPDATE_QUERY = "UPDATE `farmacia` SET `nombre`=?,`ubicacion`=?,`estadoTurno`=?,`idAdministrador`=? WHERE `idFarmacia`=?";
 	private static final String READ_QUERY = "SELECT * FROM `farmacia` where idFarmacia=?";
+	private static final String READ_TURNO_QUERY = "SELECT * FROM `farmacia` where estadoTurno=1";
 	private static final String READ_ALL = "SELECT * FROM `farmacia`";
 	private static final String DB_NAME = "farmacia";
 	private static final String PORT = "3306";
@@ -85,6 +86,11 @@ public class FarmaciaDAO {
 				result.setEstado(rs.getInt("estadoTurno"));
 				result.setAdministrador(rs.getInt("idAdministrador"));
 				result.setId(rs.getInt("idFarmacia"));
+				result.setTelefono(rs.getString("telefono"));
+				result.setHoraEntrada(rs.getTime("horaEntrada"));
+				result.setHoraDescanso(rs.getTime("horaDescanso"));
+				result.setHoraReanudacion(rs.getTime("horaReanudacion"));
+				result.setHoraSalida(rs.getTime("horaTermino"));
 				list.add(result);
 			}
 		} catch (SQLException ex) {
@@ -110,6 +116,38 @@ public class FarmaciaDAO {
 				result.setUbicacion(rs.getString("ubicacion"));
 				result.setEstado(rs.getInt("estadoTurno"));
 				result.setAdministrador(rs.getInt("idAdministrador"));
+				result.setTelefono(rs.getString("telefono"));
+				result.setHoraEntrada(rs.getTime("horaEntrada"));
+				result.setHoraDescanso(rs.getTime("horaDescanso"));
+				result.setHoraReanudacion(rs.getTime("horaReanudacion"));
+				result.setHoraSalida(rs.getTime("horaTermino"));
+				result.setId(rs.getInt("idFarmacia"));
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(FarmaciaTO.class.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			conexion.close();
+		}
+		return result;
+	}
+	public FarmaciaTO readTurno() throws SQLException {
+		FarmaciaTO result = null;
+
+		try {
+			conexion = getConnection();
+			PreparedStatement ps = conexion.prepareStatement(READ_TURNO_QUERY);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				result = new FarmaciaTO();
+				result.setNombre(rs.getString("nombre"));
+				result.setUbicacion(rs.getString("ubicacion"));
+				result.setEstado(rs.getInt("estadoTurno"));
+				result.setAdministrador(rs.getInt("idAdministrador"));
+				result.setTelefono(rs.getString("telefono"));
+				result.setHoraEntrada(rs.getTime("horaEntrada"));
+				result.setHoraDescanso(rs.getTime("horaDescanso"));
+				result.setHoraReanudacion(rs.getTime("horaReanudacion"));
+				result.setHoraSalida(rs.getTime("horaTermino"));
 				result.setId(rs.getInt("idFarmacia"));
 			}
 		} catch (SQLException ex) {

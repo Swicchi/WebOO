@@ -28,7 +28,7 @@
 						<div class="content">
 							<div class="inner">
 								<h1>Sistema de Gestión de Farmacias</h1>
-								<p>Farmacia de Turno: --</p>
+								<p>Farmacia de Turno: ${turno}</p>
 							</div>
 						</div>
 						<nav>
