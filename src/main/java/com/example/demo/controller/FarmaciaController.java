@@ -28,9 +28,8 @@ public class FarmaciaController {
 		}
 		FarmaciaTO farmacia1 = farmaciaDao.readTurno();
 		if(farmacia1 != null) {
-			System.out.println("hay ");
 			model.addAttribute("turno",farmacia1.getNombre());
-		
+			model.addAttribute("id",farmacia1.getId());
 		}
 		
 		return "index";
@@ -47,8 +46,8 @@ public class FarmaciaController {
 		}
 		FarmaciaTO farmacia1 = farmaciaDao.readTurno();
 		if(farmacia1 != null) {
-			System.out.println("hay ");
 			model.addAttribute("turno",farmacia1.getNombre());
+			model.addAttribute("id",farmacia1.getId());
 		
 		}
 		return "index";

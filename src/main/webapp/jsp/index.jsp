@@ -28,7 +28,7 @@
 						<div class="content">
 							<div class="inner">
 								<h1>Sistema de Gestión de Farmacias</h1>
-								<p>Farmacia de Turno: ${turno}</p>
+								<p>Farmacia de Turno: ${turno}  <a href="verfarmacia?id=${id}" > VER DETALLE</a></p>
 							</div>
 						</div>
 						<nav>
@@ -61,7 +61,6 @@
 													<th style="text-align:center;">Nombre farmacia</th>
 													<th style="text-align:center;">Direccion</th>
 													<th style="text-align:center;">Estado</th>
-													<th style="text-align:center;">Accion</th>
 													<!-- <th style="text-align:center;">Horario Apertura</th>
 													<th style="text-align:center;">Horario Intermedio</th>
 													<th style="text-align:center;">Horario ReanudaciÃ³n</th>
@@ -244,7 +243,7 @@
                                     <tr class="odd gradeX">
                                         <td>${farmacia.nombre}</td>
                                         <td>${farmacia.ubicacion}</td>
-                                        <td style="text-align:center;"><c:if test="${farmacia.estado == 1}"> <p>EN TURNO</p><td><a href="verfarmacia?id=${farmacia.id}" >VER</a></td> </c:if><c:if test="${farmacia.estado != 1}"><p>FUERA DE TURNO</p></c:if></td>
+                                        <td style="text-align:center;"><c:if test="${farmacia.estado == 1}"> <p>EN TURNO</p><td></td> </c:if><c:if test="${farmacia.estado != 1}"><p>FUERA DE TURNO</p></c:if></td>
                                     </tr>
                                     </c:forEach>                                   
                                 </tbody>
