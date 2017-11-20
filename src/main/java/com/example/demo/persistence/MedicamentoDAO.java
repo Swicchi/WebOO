@@ -1,5 +1,6 @@
 package com.example.demo.persistence;
 
+import com.example.demo.transferobject.FarmaciaXMedicamentoTO;
 import com.example.demo.transferobject.MedicamentoTO;
 
 import java.sql.Connection;
@@ -21,6 +22,7 @@ public class MedicamentoDAO {
 	private static final String UPDATE_QUERY = "UPDATE `medicamento` SET `nombre`=? WHERE `idMedicamento`=?";
 	private static final String READ_QUERY = "SELECT * FROM `medicamento` where idMedicamento=?";
 	private static final String READ_ALL = "SELECT * FROM `medicamento`";
+	private static final String READ_MEDICAMENTO = "SELECT *, farmacia.nombre AS nombreFarmacia FROM `medicamento` JOIN `farmaciaxmedicamento` ON medicamento.idMedicamento = farmaciaxmedicamento.idMedicamento JOIN `farmacia` ON farmaciaxmedicamento.idFarmacia = farmacia.idFarmacia where `nombreComercial`=?  OR `nombreGenerico`=?";
 	private static final String DB_NAME = "farmacia";
 	private static final String PORT = "3306";
 	private static final String URL = "jdbc:mysql://localhost:" + PORT + "/" + DB_NAME;
@@ -126,6 +128,36 @@ public class MedicamentoDAO {
 				conexion.close();
 		}
 		return resultado;
+	}
+	
+	public LinkedList<FarmaciaXMedicamentoTO> readConsulta(MedicamentoTO medicamento) throws SQLException {
+		LinkedList<FarmaciaXMedicamentoTO> list = new LinkedList<>();
+		FarmaciaXMedicamentoTO result = null;
+		try {
+			conexion = getConnection();
+			PreparedStatement ps = conexion.prepareStatement(READ_MEDICAMENTO);
+			ps.setString(1, medicamento.getNombre());
+			ps.setString(2, medicamento.getNombre());
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				result = new FarmaciaXMedicamentoTO();
+				result.setNombreGenerico(rs.getString("nombreGenerico"));
+				result.setNombreComercial(rs.getString("nombreComercial"));
+				result.setIdMedicamento(rs.getInt("idMedicamento"));
+				result.setIdFarmacia(rs.getInt("idFarmacia"));
+				result.setNombreFarmacia(rs.getString("nombreFarmacia"));
+				result.setUbicacion(rs.getString("ubicacion"));
+				result.setPrecio(rs.getInt("precio"));
+				result.setStock(rs.getInt("stock"));
+				list.add(result);
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(MedicamentoTO.class.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			if (conexion != null)
+				conexion.close();
+		}
+		return list;
 	}
 
 	private static Connection getConnection() {

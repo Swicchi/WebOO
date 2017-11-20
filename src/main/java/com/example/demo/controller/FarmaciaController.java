@@ -243,4 +243,18 @@ public class FarmaciaController {
 		}
 		return this.verUsuarios(model);
 	}
+	
+	@RequestMapping(value= "/muestraMedicamento", method= RequestMethod.POST)
+	public String verConsultaMedicamento(@RequestParam(value="name", required=false, defaultValue="World") String name,Model model) throws SQLException {
+		MedicamentoTO med= new MedicamentoTO();
+		LinkedList<FarmaciaXMedicamentoTO> meds= new LinkedList<>();
+		med.setNombre(name);
+		MedicamentoDAO medDao = new MedicamentoDAO();
+		meds = medDao.readConsulta(med);
+		if(med != null) {
+			model.addAttribute("list",meds);
+			return "muestraMedicamento";
+		}
+		return "index";
+	}
 }

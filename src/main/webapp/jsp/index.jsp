@@ -314,7 +314,7 @@
 						<!-- About -->
 							<article id="about">
 								<h2 class="major">Consulta medicamentos</h2>
-						<form method="post" action="#">
+						<form method="post" action="muestraMedicamento">
 									<div class="field half first">
 										<label for="name">Nombre Medicamento</label> 
 										<input type="text" name="name" id="name" />
