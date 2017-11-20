@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <!--
 	Dimension by HTML5 UP
 	html5up.net | @ajlkn
@@ -12,6 +13,7 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		
 	</head>
 	<body>
 
@@ -58,14 +60,15 @@
 												<tr>
 													<th style="text-align:center;">Nombre farmacia</th>
 													<th style="text-align:center;">Direccion</th>
-													<th style="text-align:center;">Telefono</th>
-													<th style="text-align:center;">Horario Apertura</th>
+													<th style="text-align:center;">Estado</th>
+													<th style="text-align:center;">Accion</th>
+													<!-- <th style="text-align:center;">Horario Apertura</th>
 													<th style="text-align:center;">Horario Intermedio</th>
 													<th style="text-align:center;">Horario Reanudación</th>
-													<th style="text-align:center;">Horario Cierre</th>
+													<th style="text-align:center;">Horario Cierre</th> -->
 												</tr>
 											</thead>
-											<tbody>
+											<!-- <tbody>
 												<tr>
 															<td style="width:250px">AHUMADA</td>
 															<td>CINCO DE ABRIL N°702</td>
@@ -235,11 +238,20 @@
 														<td style="text-align:center;">-</td>
 														<td>08:59:00</td>
 													</tr>
-											</tbody>
+											</tbody> -->
+											<tbody>
+                                 <c:forEach var="farmacia" items="${list}">  
+                                    <tr class="odd gradeX">
+                                        <td>${farmacia.nombre}</td>
+                                        <td>${farmacia.ubicacion}</td>
+                                        <td style="text-align:center;"><c:if test="${farmacia.estado == 1}"> <p>EN TURNO</p><td><a href="verfarmacia?id=${farmacia.id}" >VER</a></td> </c:if><c:if test="${farmacia.estado != 1}"><p>FUERA DE TURNO</p></c:if></td>
+                                    </tr>
+                                    </c:forEach>                                   
+                                </tbody>
 										
 											
 											
-												<tr>
+												<!-- <tr>
 															<td style="width:250px">AHUMADA</td>
 															<td>AVDA. LONG. NORTE N°134, L-1003 (JUMBO)</td>
 															<td>+56422270627</td>
@@ -295,7 +307,7 @@
 															<td style="text-align:center;">-</td>
 															<td style="text-align:center;">-</td>
 															<td>21:00:00</td>
-														</tr>
+														</tr> -->
 											
 										</table></div>
 							</article>

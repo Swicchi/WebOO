@@ -17,8 +17,27 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class FarmaciaController {
 	@RequestMapping(value = "/")
-	public String index() {
-		System.out.println("holaaaaa");
+	public String index(Model model) throws SQLException {
+		LinkedList<FarmaciaTO> farmacia= new LinkedList<>();
+
+		FarmaciaDAO farmaciaDao = new FarmaciaDAO();
+		farmacia = farmaciaDao.readAll();
+		if(farmacia.size() >0) {
+			model.addAttribute("list",farmacia);
+		
+		}
+		return "index";
+	}
+	@RequestMapping(value = "/inicio")
+	public String inicio(Model model) throws SQLException {
+		LinkedList<FarmaciaTO> farmacia= new LinkedList<>();
+
+		FarmaciaDAO farmaciaDao = new FarmaciaDAO();
+		farmacia = farmaciaDao.readAll();
+		if(farmacia.size() >0) {
+			model.addAttribute("list",farmacia);
+		
+		}
 		return "index";
 	}
 
@@ -38,6 +57,17 @@ public class FarmaciaController {
 	@RequestMapping(value = "/registroUsuario")
 	public String registro() {
 		return "registroUsuario";
+	}
+	@RequestMapping(value = "/verfarmacia", method= RequestMethod.GET)
+	public String farmacia(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
+		FarmaciaTO far= new FarmaciaTO();
+		far.setId(id);
+		FarmaciaDAO farmDAO = new FarmaciaDAO();
+		far = farmDAO.read(far);
+		if(far!=null) {
+		model.addAttribute("farmacia",far);
+		}
+		return "farmaciadetalle";
 	}
 	@RequestMapping(value = "/login")
 	public String login() {
