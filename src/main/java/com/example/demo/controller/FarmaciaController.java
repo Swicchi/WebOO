@@ -18,33 +18,38 @@ import org.springframework.stereotype.Controller;
 public class FarmaciaController {
 	@RequestMapping(value = "/")
 	public String index() {
-		return "login.jsp";
+		System.out.println("holaaaaa");
+		return "index";
 	}
 
 	@RequestMapping(value= "/loginAdmin", method= RequestMethod.POST)
-	public String greeting(@RequestParam(value="user", required=false, defaultValue="World") String correo,@RequestParam(value="pass",
-	required=false, defaultValue="World") String pass, Model model) throws SQLException {
+	public String greeting(@RequestParam(value="user", required=false) String correo,@RequestParam(value="pass",
+	required=false) String pass, Model model) throws SQLException {
 		AdministradorTO admin= new AdministradorTO();
 		admin.setCorreo(correo);
 		admin.setClave(pass);
 		AdministradorDAO adminDao = new AdministradorDAO();
 		AdministradorTO result =adminDao.login(admin);
 		if(result!=null) {
-		return "index.jsp";
+		return "main";
 		}
-		return "login.jsp";
+		return "login";
 	}
 	@RequestMapping(value = "/registroUsuario")
 	public String registro() {
-		return "agregar-usuarios.jsp";
+		return "registroUsuario";
+	}
+	@RequestMapping(value = "/login")
+	public String login() {
+		return "login";
 	}
 	@RequestMapping(value = "/agregarUsuarios")
 	public String agregarUser() {
-		return "agregar-usuarios.jsp";
+		return "agregar-usuarios";
 	}
 	@RequestMapping(value = "/agregarMedicamentos")
 	public String agregarMedicamentos() {
-		return "agregar-medicamentos.jsp";
+		return "agregar-medicamentos";
 	}
 	@RequestMapping(value= "/addUser", method= RequestMethod.POST)
 	public String addUser(@RequestParam(value="nombres-usuarios", required=false, defaultValue="World") String nombre,
@@ -70,7 +75,7 @@ public class FarmaciaController {
 		if(result == 1) {
 		return verUsuarios(model);
 		}
-		return "agregar-usuarios.jsp";
+		return "agregar-usuarios";
 	}
 	@RequestMapping(value= "/modUser", method= RequestMethod.POST)
 	public String moduser(@RequestParam(value="nombres-usuarios", required=false, defaultValue="World") String nombre,
@@ -110,7 +115,7 @@ public class FarmaciaController {
 		if(result ==1) {
 		return verMedicamento(model);
 		}
-		return "agregar-medicamentos.jsp";
+		return "agregar-medicamentos";
 	}
 	@RequestMapping(value= "/modMedic", method= RequestMethod.POST)
 	public String modMedicamento(@RequestParam(value="nombres-medicamentos", required=false, defaultValue="World") String nombre,@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
@@ -135,7 +140,7 @@ public class FarmaciaController {
 		model.addAttribute("list",med);
 		
 		}
-		return "ver-medicamentos.jsp";
+		return "ver-medicamentos";
 	}
 	@RequestMapping(value= "/verUsuarios")
 	public String verUsuarios(Model model) throws SQLException {
@@ -147,7 +152,7 @@ public class FarmaciaController {
 		model.addAttribute("list",user);
 		
 		}
-		return "ver-usuarios.jsp";
+		return "ver-usuarios";
 	}
 	@RequestMapping(value= "/editmed", method= RequestMethod.GET)
 	public String editarMedicamento(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
@@ -157,9 +162,9 @@ public class FarmaciaController {
 		med = medDao.read(med);
 		if(med!=null) {
 		model.addAttribute("med",med);
-		return "modificar-medicamentos.jsp";
+		return "modificar-medicamentos";
 		}
-		return "modificar-medicamentos.jsp";
+		return "modificar-medicamentos";
 	}
 	@RequestMapping(value= "/deletemed", method= RequestMethod.GET)
 	public String eliminarMedicamento(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
@@ -180,9 +185,9 @@ public class FarmaciaController {
 		user = userDao.read(user);
 		if(user!=null) {
 		model.addAttribute("user",user);
-		return "modificar-usuarios.jsp";
+		return "modificar-usuarios";
 		}
-		return "modificar-usuarios.jsp";
+		return "modificar-usuarios";
 	}
 	@RequestMapping(value= "/deleteuser", method= RequestMethod.GET)
 	public String eliminarUser(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {

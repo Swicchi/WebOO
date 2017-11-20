@@ -132,7 +132,7 @@ function checkRut(rut) {
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil de usuario</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.jsp"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
+                        <li><a href="login"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
