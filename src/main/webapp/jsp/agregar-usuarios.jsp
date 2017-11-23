@@ -41,7 +41,7 @@
                                         </div>                                
                                         <div class="form-group">
                                             <label>Telefono</label>
-                                            <input class="form-control" required pattern="[9]{1}[0-9]{8}" minlength="8" maxlength="9" type="number" placeholder="Ingrese su numero telefonico" name="telefono-usuarios" id="">
+                                            <input class="form-control" required pattern="[9]{1}[0-9]{8}"  maxlength="9" type="number" placeholder="Ingrese su numero telefonico" name="telefono-usuarios" id="">
                                         </div>
 										<div class="form-group">
                                             <label>Contraseña</label>

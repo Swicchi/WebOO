@@ -6,6 +6,13 @@
 	<jsp:include page="layout.jsp"/>
         <!-- Page Content -->
         <div id="page-wrapper">
+           <c:if test="${error!=null}"><script>
+
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
+</script> <div id="snackbar" class="alert alert-warning">${error}</div></c:if>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
@@ -23,7 +30,8 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>Nombre</th>
+                                        <th>Nombre Comercial</th>
+                                           <th>Nombre Generico</th>
 										<th>Opciones </th>
 										
                                     </tr>
@@ -31,7 +39,8 @@
                                 <tbody>
                                  <c:forEach var="medicamento" items="${list}">  
                                     <tr class="odd gradeX">
-                                        <td>${medicamento.nombre}</td> 
+                                        <td>${medicamento.nombreComercial}</td> 
+                                        <td>${medicamento.nombreGenerico}</td> 
 										<td><a href="editmed?id=${medicamento.idMedicamento}"   class="btn btn-success">Editar</a> <a href="deletemed?id=${medicamento.idMedicamento}" onclick="return validar();" class="btn btn-danger">Eliminar</a></td>
                                     </tr>
                                  </c:forEach>                                   

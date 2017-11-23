@@ -17,8 +17,12 @@
 					<form role="form" action="modMedic" method="post">
                                         
                                         <div class="form-group" >
-                                            <label>Nombre del medicamento</label>
-                                            <input class="form-control" required value="${med.nombre}" placeholder="Ingrese el nombre" name="nombres-medicamentos" id="">
+                                            <label>Nombre Comercial del medicamento</label>
+                                            <input class="form-control" required value="${med.nombreComercial}" placeholder="Ingrese el nombre" name="nombre-comercial" id="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nombre Generico del medicamento</label>
+                                            <input class="form-control" required  value="${med.nombreGenerico}" placeholder="Ingrese el nombre generico" name="nombre-generico" id="">
                                         </div>
 										 <input class="form-control" value="${med.idMedicamento}" placeholder="Ingrese el nombre" type="hidden" name="id" id="">
 										<button type="submit" class="btn btn-default">Enviar</button>

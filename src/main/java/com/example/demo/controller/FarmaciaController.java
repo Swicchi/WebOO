@@ -62,8 +62,9 @@ public class FarmaciaController {
 		AdministradorDAO adminDao = new AdministradorDAO();
 		AdministradorTO result =adminDao.login(admin);
 		if(result!=null) {
-		return "main";
+			return "main";
 		}
+		model.addAttribute("error","Datos incorrectos");
 		return "login";
 	}
 	@RequestMapping(value = "/registroUsuario")
@@ -114,9 +115,11 @@ public class FarmaciaController {
 		
 		UsuarioDAO userDao = new UsuarioDAO();
 		int result =userDao.create(user);
-		if(result == 1) {
-		return verUsuarios(model);
+		if(result ==1) {
+			model.addAttribute("error","Se agrego registro");
+		return this.verUsuarios(model);
 		}
+		model.addAttribute("error","No se agrego registro");
 		return "agregar-usuarios";
 	}
 	@RequestMapping(value= "/modUser", method= RequestMethod.POST)
@@ -143,33 +146,42 @@ public class FarmaciaController {
 		UsuarioDAO userDao = new UsuarioDAO();
 		int result =userDao.update(user);
 		if(result ==1) {
+			model.addAttribute("error","Se modifico registro");
 		return this.verUsuarios(model);
 		}
+		model.addAttribute("error","No se modifico registro");
 		return moduser(nombre,app,apm,rut,email,dir,tel,id,pass,model);
 	}
 	@RequestMapping(value= "/addMedic", method= RequestMethod.POST)
-	public String addMedicamento(@RequestParam(value="nombres-medicamentos", required=false, defaultValue="World") String nombre,Model model) throws SQLException {
+	public String addMedicamento(@RequestParam(value="nombre-comercial") String nombreComercial,@RequestParam(value="nombre-generico") String nombreGenerico,Model model) throws SQLException {
 		MedicamentoTO med= new MedicamentoTO();
-		med.setNombre(nombre);
+		med.setNombreComercial(nombreComercial);
+		med.setNombreGenerico(nombreGenerico);
 		
 		MedicamentoDAO medDao = new MedicamentoDAO();
 		int result =medDao.create(med);
 		if(result ==1) {
-		return verMedicamento(model);
+			model.addAttribute("error","Se modifico registro");
+			return verMedicamento(model);
 		}
+		model.addAttribute("error","No se agrego registro");
 		return "agregar-medicamentos";
 	}
 	@RequestMapping(value= "/modMedic", method= RequestMethod.POST)
-	public String modMedicamento(@RequestParam(value="nombres-medicamentos", required=false, defaultValue="World") String nombre,@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
+	public String modMedicamento(@RequestParam(value="nombre-comercial") String nombreComercial,@RequestParam(value="nombre-generico") String nombreGenerico,@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
 		MedicamentoTO med= new MedicamentoTO();
-		med.setNombre(nombre);
+		med.setNombreComercial(nombreComercial);
+		med.setNombreGenerico(nombreGenerico);
 		med.setIdMedicamento(id);
 		MedicamentoDAO medDao = new MedicamentoDAO();
 		int result =medDao.update(med);
 		if(result ==1) {
-		return verMedicamento(model);
+			model.addAttribute("error","Se modifico registro");
+			return verMedicamento(model);
+			
 		}
 		model.addAttribute("med",med);
+		model.addAttribute("error","No se modifico registro");
 		return editarMedicamento(id,model);
 	}
 	@RequestMapping(value= "/verMedicamentos")
@@ -179,9 +191,10 @@ public class FarmaciaController {
 		MedicamentoDAO medDao = new MedicamentoDAO();
 		med = medDao.readAll();
 		if(med.size() >0) {
-		model.addAttribute("list",med);
-		
+			model.addAttribute("list",med);
+			return "ver-medicamentos";
 		}
+		model.addAttribute("error","No hay datos");
 		return "ver-medicamentos";
 	}
 	@RequestMapping(value= "/verUsuarios")
@@ -191,9 +204,10 @@ public class FarmaciaController {
 		UsuarioDAO userDao = new UsuarioDAO();
 		user = userDao.readAll();
 		if(user.size() >0) {
-		model.addAttribute("list",user);
-		
+			model.addAttribute("list",user);
+			return "ver-usuarios";
 		}
+		model.addAttribute("error","No hay datos");
 		return "ver-usuarios";
 	}
 	@RequestMapping(value= "/editmed", method= RequestMethod.GET)
@@ -215,8 +229,10 @@ public class FarmaciaController {
 		MedicamentoDAO medDao = new MedicamentoDAO();
 		
 		if( medDao.delete(med)) {
+			model.addAttribute("error","Se elimino registro");
 		return this.verMedicamento(model);
 		}
+		model.addAttribute("error","No se elimino registro");
 		return this.verMedicamento(model);
 	}
 	@RequestMapping(value= "/edituser", method= RequestMethod.GET)
@@ -239,8 +255,10 @@ public class FarmaciaController {
 		
 		
 		if( userDao.delete(user)) {
+			model.addAttribute("error","Se elimino registro");
 		return this.verUsuarios(model);
 		}
+		model.addAttribute("error","No se elimino registro");
 		return this.verUsuarios(model);
 	}
 	
@@ -248,13 +266,14 @@ public class FarmaciaController {
 	public String verConsultaMedicamento(@RequestParam(value="name", required=false, defaultValue="World") String name,Model model) throws SQLException {
 		MedicamentoTO med= new MedicamentoTO();
 		LinkedList<FarmaciaXMedicamentoTO> meds= new LinkedList<>();
-		med.setNombre(name);
+		med.setNombreComercial(name);
 		MedicamentoDAO medDao = new MedicamentoDAO();
 		meds = medDao.readConsulta(med);
-		if(med != null) {
+		if(meds.size()>0) {
 			model.addAttribute("list",meds);
 			return "muestraMedicamento";
 		}
-		return "index";
+		model.addAttribute("error","No se encontro registro");
+		return this.index(model);
 	}
 }

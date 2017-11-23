@@ -3,9 +3,17 @@
     pageEncoding="ISO-8859-1"%>
     <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%> 
 
-      
+      <script>
+		function myFunction() {
+			var x = document.getElementById("snackbar")
+			x.className = "show";
+			setTimeout(function() {
+				x.className = x.className.replace("show", "");
+			}, 3000);
+		}
+	</script>
 	<jsp:include page="layout.jsp"/>
-
+ <c:if test="${error!=null}"><div id="snackbar" class="alert alert-warning">${error}</div></c:if>
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
@@ -17,8 +25,12 @@
 					<form role="form" action="addMedic" method="post">
                                         
                                         <div class="form-group">
-                                            <label>Nombre del medicamento</label>
-                                            <input class="form-control" required placeholder="Ingrese el nombre" name="nombres-medicamentos" id="">
+                                            <label>Nombre Comercial del medicamento</label>
+                                            <input class="form-control" required placeholder="Ingrese el nombre comercial" name="nombre-comercial" id="">
+                                        </div>
+                                         <div class="form-group">
+                                            <label>Nombre Generico del medicamento</label>
+                                            <input class="form-control" required placeholder="Ingrese el nombre generico" name="nombre-generico" id="">
                                         </div>
 										<!-- <div class="form-group">
                                             <label>Precio</label>

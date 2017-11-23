@@ -17,9 +17,9 @@ import java.util.logging.Logger;
  * @author Remigio
  */
 public class MedicamentoDAO {
-	private static final String INSERT_QUERY = "INSERT INTO `medicamento`( `nombre`) VALUES(?)";
+	private static final String INSERT_QUERY = "INSERT INTO `medicamento`( `nombreComercial`, `nombreGenerico`) VALUES(?,?)";
 	private static final String DELETE_QUERY = "DELETE FROM `medicamento` WHERE idMedicamento=?";
-	private static final String UPDATE_QUERY = "UPDATE `medicamento` SET `nombre`=? WHERE `idMedicamento`=?";
+	private static final String UPDATE_QUERY = "UPDATE `medicamento` SET `nombreComercial`=?,`nombreGenerico`=? WHERE `idMedicamento`=?";
 	private static final String READ_QUERY = "SELECT * FROM `medicamento` where idMedicamento=?";
 	private static final String READ_ALL = "SELECT * FROM `medicamento`";
 	private static final String READ_MEDICAMENTO = "SELECT *, farmacia.nombre AS nombreFarmacia FROM `medicamento` JOIN `farmaciaxmedicamento` ON medicamento.idMedicamento = farmaciaxmedicamento.idMedicamento JOIN `farmacia` ON farmaciaxmedicamento.idFarmacia = farmacia.idFarmacia where `nombreComercial`=?  OR `nombreGenerico`=?";
@@ -36,7 +36,8 @@ public class MedicamentoDAO {
 		try {
 			conexion = getConnection();
 			PreparedStatement 	ps = conexion.prepareStatement(INSERT_QUERY);
-			ps.setString(1, medicamento.getNombre());
+			ps.setString(1, medicamento.getNombreComercial());
+			ps.setString(2, medicamento.getNombreGenerico());
 			ps.executeUpdate();
 			result = 1;
 		} catch (SQLException e) {
@@ -55,8 +56,9 @@ public class MedicamentoDAO {
 		try {
 			conexion = getConnection();
 			PreparedStatement ps = conexion.prepareStatement(UPDATE_QUERY);
-			ps.setString(1, medicamento.getNombre());
-			ps.setInt(2, medicamento.getIdMedicamento());
+			ps.setString(1, medicamento.getNombreComercial());
+			ps.setString(2, medicamento.getNombreGenerico());
+			ps.setInt(3, medicamento.getIdMedicamento());
 			ps.executeUpdate();
 			result = 1;
 		} catch (SQLException e) {
@@ -79,7 +81,8 @@ public class MedicamentoDAO {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				result = new MedicamentoTO();
-				result.setNombre(rs.getString("nombre"));
+				result.setNombreComercial(rs.getString("nombreComercial"));
+				result.setNombreGenerico(rs.getString("nombreGenerico"));
 				result.setIdMedicamento(rs.getInt("idMedicamento"));
 				list.add(result);
 			}
@@ -102,7 +105,8 @@ public class MedicamentoDAO {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				result = new MedicamentoTO();
-				result.setNombre(rs.getString("nombre"));
+				result.setNombreComercial(rs.getString("nombreComercial"));
+				result.setNombreGenerico(rs.getString("nombreGenerico"));
 				result.setIdMedicamento(rs.getInt("idMedicamento"));
 			}
 		} catch (SQLException ex) {
@@ -136,8 +140,8 @@ public class MedicamentoDAO {
 		try {
 			conexion = getConnection();
 			PreparedStatement ps = conexion.prepareStatement(READ_MEDICAMENTO);
-			ps.setString(1, medicamento.getNombre());
-			ps.setString(2, medicamento.getNombre());
+			ps.setString(1, medicamento.getNombreComercial());
+			ps.setString(2, medicamento.getNombreComercial());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				result = new FarmaciaXMedicamentoTO();

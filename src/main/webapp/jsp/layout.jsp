@@ -6,7 +6,77 @@
 <html lang="en">
 
 <head>
+	<style>
+#snackbar {
+	visibility: hidden;
+	min-width: 250px;
+	margin-left: -125px;
+	background-color: #333;
+	color: #fff;
+	text-align: center;
+	border-radius: 2px;
+	padding: 16px;
+	position: fixed;
+	z-index: 1;
+	left: 50%;
+	bottom: 30px;
+	font-size: 17px;
+}
 
+#snackbar.show {
+	visibility: visible;
+	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@
+-webkit-keyframes fadein {
+	from {bottom: 0;
+	opacity: 0;
+}
+
+to {
+	bottom: 30px;
+	opacity: 1;
+}
+
+}
+@
+keyframes fadein {
+	from {bottom: 0;
+	opacity: 0;
+}
+
+to {
+	bottom: 30px;
+	opacity: 1;
+}
+
+}
+@
+-webkit-keyframes fadeout {
+	from {bottom: 30px;
+	opacity: 1;
+}
+
+to {
+	bottom: 0;
+	opacity: 0;
+}
+
+}
+@
+keyframes fadeout {
+	from {bottom: 30px;
+	opacity: 1;
+}
+
+to {
+	bottom: 0;
+	opacity: 0;
+}
+}
+</style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -100,10 +170,29 @@ function checkRut(rut) {
     // Si todo sale bien, eliminar errores (decretar que es válido)
     rut.setCustomValidity('');
 }
+function myFunction() {
+    // Get the snackbar DIV
+    var x = document.getElementById("snackbar")
+
+    // Add the "show" class to DIV
+    x.className = "show";
+
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
 </script>
+<script>
+		function myFunction() {
+			var x = document.getElementById("snackbar")
+			x.className = "show";
+			setTimeout(function() {
+				x.className = x.className.replace("show", "");
+			}, 3000);
+		}
+	</script>
 </head>
 
-<body>
+<body Onload="myFunction();">
 
     <div id="wrapper">
 
@@ -217,5 +306,6 @@ function checkRut(rut) {
             </div>
             <!-- /.navbar-static-side -->
         </nav>
+        <c:if test="${error!=null}"><div id="snackbar" class="alert alert-warning">${error}</div></c:if>
 
      

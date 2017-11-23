@@ -18,12 +18,18 @@
 	<body>
 
 		<!-- Wrapper -->
-			<div id="wrapper">
+			<div id="wrapper" style:block>
 
 				<!-- Header -->
+				
+
+				
+				
+				
 					<header id="header">
-						<article id="intro">
-								<h2 class="major">${farmacia.nombre}</h2>
+						<article id="intro" style="display: initial" class="active">
+						<a href="inicio">X</a>
+								<h2 class="major"> ${farmacia.nombre}</h2>
 								<p>Ubicación:         ${farmacia.ubicacion}</p>
 								<p>Telefono Contacto: ${farmacia.telefono}</p>
 								<p>Hora Apertura:     ${farmacia.horaEntrada}</p>
@@ -31,7 +37,7 @@
 								<p>Hora Reanudación:  ${farmacia.horaReanudacion}</p>
 								<p>Hora Termino:      ${farmacia.horaSalida}</p>
 								
-								  <a href="inicio">X</a>
+								  
 						</article>
 					</header>
 					
