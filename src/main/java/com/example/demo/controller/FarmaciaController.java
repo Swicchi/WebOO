@@ -161,7 +161,7 @@ public class FarmaciaController {
 		MedicamentoDAO medDao = new MedicamentoDAO();
 		int result =medDao.create(med);
 		if(result ==1) {
-			model.addAttribute("error","Se modifico registro");
+			model.addAttribute("error","Se agrego registro");
 			return verMedicamento(model);
 		}
 		model.addAttribute("error","No se agrego registro");
@@ -263,16 +263,18 @@ public class FarmaciaController {
 	}
 	
 	@RequestMapping(value= "/muestraMedicamento", method= RequestMethod.POST)
-	public String verConsultaMedicamento(@RequestParam(value="name", required=false, defaultValue="World") String name,Model model) throws SQLException {
+	public String verConsultaMedicamento(@RequestParam(value="name") String name,Model model) throws SQLException {
 		MedicamentoTO med= new MedicamentoTO();
 		LinkedList<FarmaciaXMedicamentoTO> meds= new LinkedList<>();
 		med.setNombreComercial(name);
+		System.out.println(med.getNombreComercial());
 		MedicamentoDAO medDao = new MedicamentoDAO();
 		meds = medDao.readConsulta(med);
 		if(meds.size()>0) {
 			model.addAttribute("list",meds);
 			return "muestraMedicamento";
 		}
+		System.out.println(meds.size());
 		model.addAttribute("error","No se encontro registro");
 		return this.index(model);
 	}

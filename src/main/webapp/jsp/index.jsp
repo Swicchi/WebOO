@@ -24,13 +24,13 @@
 	background-color:#ffff11 ;
 	color: #000;
 	text-align: center;
-	border-radius: 2px;
-	padding: 16px;
+	border-radius: 5px;
+	padding: 32px;
 	position: fixed;
 	z-index: 1;
 	left: 50%;
 	bottom: 30px;
-	font-size: 17px;
+	font-size: 24px;
 }
 
 #snackbar.show {
