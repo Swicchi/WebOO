@@ -16,10 +16,13 @@ public class Medicamento implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id_medicamento")
 	private int idMedicamento;
 
+	@Column(name="nombre_comercial")
 	private String nombreComercial;
 
+	@Column(name="nombre_generico")
 	private String nombreGenerico;
 
 	//bi-directional many-to-one association to Farmaciaxmedicamento

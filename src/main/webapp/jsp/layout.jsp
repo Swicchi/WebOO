@@ -4,7 +4,15 @@
     <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <head>
 	<style>
 #snackbar {
@@ -234,7 +242,7 @@ function myFunction() {
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="index.html"><i class="fa fa-star fa-fw"></i> Inicio</a>
+                            <a href=main><i class="fa fa-star fa-fw"></i> Inicio</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-medkit fa-fw"></i> Medicamentos<span class="fa arrow"></span></a>
@@ -258,12 +266,6 @@ function myFunction() {
                                 <li>
                                     <a href="agregar-farmacias.html">Agregar</a>
                                 </li>
-								<li>
-                                    <a href="modificar-farmacias.html">Modificar</a>
-                                </li>
-								<li>
-                                    <a href="eliminar-farmacias.html">Eliminar</a>
-                                </li>
 							
                             </ul>
                             <!-- /.nav-second-level -->
@@ -277,12 +279,7 @@ function myFunction() {
                                 <li>
                                     <a href="agregar-administradores.html">Agregar</a>
                                 </li>
-								<li>
-                                    <a href="modificar-administradores.html">Modificar</a>
-                                </li>
-								<li>
-                                    <a href="eliminar-administradores.html">Eliminar</a>
-                                </li>
+								
 								
                             </ul>
                             <!-- /.nav-second-level -->

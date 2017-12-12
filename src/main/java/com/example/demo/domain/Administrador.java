@@ -16,10 +16,13 @@ public class Administrador implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id_administrador")
 	private int idAdministrador;
 
+	@Column(name="apellido_materno")
 	private String apellidoMaterno;
 
+	@Column(name="apellido_paterno")
 	private String apellidoPaterno;
 
 	private String clave;

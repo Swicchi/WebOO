@@ -17,16 +17,22 @@ public class Farmacia implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id_farmacia")
 	private int idFarmacia;
 
+	@Column(name="estado_turno")
 	private byte estadoTurno;
 
+	@Column(name="hora_descanso")
 	private Time horaDescanso;
 
+	@Column(name="hora_entrada")
 	private Time horaEntrada;
 
+	@Column(name="hora_reanudacion")
 	private Time horaReanudacion;
 
+	@Column(name="hora_termino")
 	private Time horaTermino;
 
 	private String nombre;
@@ -35,14 +41,14 @@ public class Farmacia implements Serializable {
 
 	private String ubicacion;
 
+	//bi-directional many-to-one association to Administrador
+	@ManyToOne
+	@JoinColumn(name="id_administrador")
+	private Administrador administrador;
+
 	//bi-directional many-to-one association to Farmaciaxmedicamento
 	@OneToMany(mappedBy="farmacia")
 	private List<Farmaciaxmedicamento> farmaciaxmedicamentos;
-
-	//bi-directional many-to-one association to Administrador
-	@ManyToOne
-	@JoinColumn(name="idAdministrador")
-	private Administrador administrador;
 
 	public Farmacia() {
 	}
@@ -119,6 +125,14 @@ public class Farmacia implements Serializable {
 		this.ubicacion = ubicacion;
 	}
 
+	public Administrador getAdministrador() {
+		return this.administrador;
+	}
+
+	public void setAdministrador(Administrador administrador) {
+		this.administrador = administrador;
+	}
+
 	public List<Farmaciaxmedicamento> getFarmaciaxmedicamentos() {
 		return this.farmaciaxmedicamentos;
 	}
@@ -139,14 +153,6 @@ public class Farmacia implements Serializable {
 		farmaciaxmedicamento.setFarmacia(null);
 
 		return farmaciaxmedicamento;
-	}
-
-	public Administrador getAdministrador() {
-		return this.administrador;
-	}
-
-	public void setAdministrador(Administrador administrador) {
-		this.administrador = administrador;
 	}
 
 }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <head>
 
     <meta charset="utf-8">
@@ -105,37 +106,7 @@ to {
 <body  Onload="myFunction();" id="page-top" class="index">
 
     <!-- Navigation -->
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="index.html">Inicio</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="medicamentos.html">Consulta medicamentos</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="farmacias.html">Farmacias Asociadas</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="login.html">Ingreso</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
+   <jsp:include page="layout2.jsp"/>
 
     <!-- Header -->
     <header>
@@ -207,7 +178,7 @@ to {
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-        Hecho con&nbsp;<i style="color:rgb(231, 76, 60)" class="fa fa-heart"></i>&nbsp;en <a href="http://www.chileestuyo.cl/destino/chillan-playas-y-montanas/" target="_blank">Chill√°n, Chile </a>
+        Hecho con&nbsp;<i style="color:rgb(231, 76, 60)" class="fa fa-heart"></i>&nbsp;en <a href="http://www.chileestuyo.cl/destino/chillan-playas-y-montanas/" target="_blank">Chill·n, Chile </a>
                     </div>
                 </div>
             </div>

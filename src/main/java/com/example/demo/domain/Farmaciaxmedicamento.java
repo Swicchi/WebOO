@@ -24,12 +24,12 @@ public class Farmaciaxmedicamento implements Serializable {
 
 	//bi-directional many-to-one association to Farmacia
 	@ManyToOne
-	@JoinColumn(name="idFarmacia")
+	@JoinColumn(name="id_farmacia")
 	private Farmacia farmacia;
 
 	//bi-directional many-to-one association to Medicamento
 	@ManyToOne
-	@JoinColumn(name="idMedicamento")
+	@JoinColumn(name="id_medicamento")
 	private Medicamento medicamento;
 
 	//bi-directional many-to-one association to Medicamentoxusuario

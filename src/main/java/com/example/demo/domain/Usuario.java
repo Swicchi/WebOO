@@ -16,10 +16,13 @@ public class Usuario implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id_usuario")
 	private int idUsuario;
 
+	@Column(name="apellido_materno")
 	private String apellidoMaterno;
 
+	@Column(name="apellido_paterno")
 	private String apellidoPaterno;
 
 	private String clave;
