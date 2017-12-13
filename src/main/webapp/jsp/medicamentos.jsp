@@ -2,6 +2,7 @@
 <html lang="en">
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <head>
 
     <meta charset="utf-8">
@@ -109,38 +110,8 @@ to {
 			<c:if test="${error!=null}">
 				<div id="snackbar" class="alert alert-warning">${error}</div>
 			</c:if>
-    <!-- Navigation -->
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="index.html">Inicio</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="medicamentos.html">Consulta medicamentos</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="farmacias.html">Farmacias Asociadas</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="login.html">Ingreso</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
+   
+   <jsp:include page="layout2.jsp"/>
 
     <!-- Header -->
      <header>
@@ -160,23 +131,42 @@ to {
         <thead>
             <tr>
                 <th>Nombre Comercial</th> 
-                <th>Nombre Generico</th>
+                <th>Nombre Generico</th> 
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Farmacia</th>
+                <th>Ubicación</th>
+                <th>Acción</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
                 <th>Nombre Comercial</th> 
                 <th>Nombre Generico</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Farmacia</th>
+                <th>Ubicación</th>
+                <th>Acción</th>
             </tr>
         </tfoot>
         <tbody>
         
 							<c:forEach var="medicamento" items="${list}">
-								<tr>
-									<td>${medicamento.nombreComercial}</td>
+								<c:if test="${fn:length(medicamento.farmaciaxmedicamentos)>0}">
+								
+									<c:forEach var="medicamento2" items="${medicamento.farmaciaxmedicamentos}">
+									<tr><td>${medicamento.nombreComercial}</td>
 									<td>${medicamento.nombreGenerico}</td>
-									
-								</tr>
+                						
+										<td>${medicamento2.precio}</td>
+										<td>${medicamento2.stock}</td>
+										<td>${medicamento2.farmacia.nombre}</td>
+										<td>${medicamento2.farmacia.ubicacion}</td>
+										<td><a href="loginuser?id=${medicamento2.id}"  onclick="return validar();" class="btn btn-danger">Solicitar</a></td>
+									</tr>
+									</c:forEach>
+								</c:if>
 							</c:forEach>
 			 </tbody>
     </table>
@@ -246,6 +236,18 @@ to {
 				x.className = x.className.replace("show", "");
 			}, 3000);
 		}
+		function validar(){
+	        //Ingresamos un mensaje a mostrar
+	       var mensaje = confirm('¿Desea solicitar este medicamento?');
+	       //Detectamos si el usuario acepto el mensaje
+	       if (mensaje) {
+	           return true;
+	       }
+	       //Detectamos si el usuario denegó el mensaje
+	       else {
+	           return false;
+	       }
+	    }
 	</script>
 
 

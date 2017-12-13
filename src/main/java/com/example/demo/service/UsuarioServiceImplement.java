@@ -29,4 +29,7 @@ public class UsuarioServiceImplement implements UsuarioService{
 	public void delete(Integer id) {
 		usuarioRepository.delete(id);
 	}
+	public Usuario login(String user, String clave) {
+		return  usuarioRepository.login(user, clave);
+	}
 }

@@ -135,7 +135,7 @@ to {
 							</div>
 						  </div>
 						  <div class="form-group form-group-lg">
-							<label class="col-sm-2 control-label" for="formGroupInputSmall">Contraseña</label>
+							<label class="col-sm-2 control-label" for="formGroupInputSmall">Contrase�a</label>
 							<div class="col-sm-10">
 							  <input class="form-control" name="pass" type="password" id="formGroupInputSmall" placeholder="***********">
 							</div>
@@ -145,10 +145,7 @@ to {
 
 				</form>
 
-				<br>
-				<p>¿No tienes cuenta? Registrate aca</p> 
-				<a class="btn btn-default" href="registro.html" role="button">Registrate!</a>
-
+				
 				
 				</div>
             </div>

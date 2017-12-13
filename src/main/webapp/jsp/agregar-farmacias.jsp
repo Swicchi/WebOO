@@ -20,7 +20,7 @@
                                             <input class="form-control" placeholder="Ingrese el nombre de la farmacia" name="nombres-farmacias" id="">
                                         </div>
 										<div class="form-group">
-                                            <label>Dirección de la Farmacia</label>
+                                            <label>Direcci�n de la Farmacia</label>
                                             <input class="form-control" placeholder="Ingrese la dirección de la farmacia" name="direccion-farmacia" id="">
                                         </div>
                                         <button type="submit" class="btn btn-default">Enviar</button>

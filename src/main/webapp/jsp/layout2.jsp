@@ -9,7 +9,7 @@
 					<span class="sr-only">Toggle navigation</span> Menu <i
 						class="fa fa-bars"></i>
 				</button>
-				<a class="navbar-brand" href="/">Inicio</a>
+				<a class="navbar-brand" href="inicio">Inicio</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -21,7 +21,7 @@
 							medicamentos</a></li>
 					<li class="page-scroll"><a href="farmacias">Farmacias
 							Asociadas</a></li>
-					<li class="page-scroll"><a href="login">Ingreso</a></li>
+					<li class="page-scroll"><a href="login">Ingreso Administrador</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->

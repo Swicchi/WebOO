@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.sql.SQLException;
 import java.util.LinkedList;
+import java.util.Map;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +33,8 @@ public class FarmaciaController {
 	private MedicamentoxusuarioService medicamentoxusuarioService;
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	private Medicamentoxusuario medicamentoU = new Medicamentoxusuario(); 
 	@RequestMapping(value = "/")
 	public String index(Model model) throws SQLException {
 
@@ -45,20 +48,13 @@ public class FarmaciaController {
 	}
 	@RequestMapping(value = "/inicio")
 	public String inicio(Model model) throws SQLException {
-		LinkedList<FarmaciaTO> farmacia= new LinkedList<>();
 
-		FarmaciaDAO farmaciaDao = new FarmaciaDAO();
-		farmacia = farmaciaDao.readAll();
-		if(farmacia.size() >0) {
-			model.addAttribute("list",farmacia);
-		
+		Farmacia farmacia = farmaciaService.readTurno();
+		if(farmacia != null) {
+			model.addAttribute("turno",farmacia.getNombre());
+			model.addAttribute("id",farmacia.getIdFarmacia());
 		}
-		FarmaciaTO farmacia1 = farmaciaDao.readTurno();
-		if(farmacia1 != null) {
-			model.addAttribute("turno",farmacia1.getNombre());
-			model.addAttribute("id",farmacia1.getId());
 		
-		}
 		return "index";
 	}
 	@RequestMapping(value = "/farmacias")
@@ -95,9 +91,27 @@ public class FarmaciaController {
 		model.addAttribute("error","Datos incorrectos");
 		return "login";
 	}
-	@RequestMapping(value = "/registroUsuario")
+	@RequestMapping(value= "/loginUsuario", method= RequestMethod.POST)
+	public String loginuser(@RequestParam(value="user", required=false) String correo,@RequestParam(value="pass",
+	required=false) String pass, Model model) throws SQLException {
+		/*AdministradorTO admin= new AdministradorTO();
+		admin.setCorreo(correo);
+		admin.setClave(pass);
+		AdministradorDAO adminDao = new AdministradorDAO();*/
+		Usuario result =usuarioService.login(correo,pass);
+		if(result!=null) {
+			medicamentoU.setUsuario(result);
+			medicamentoxusuarioService.add(medicamentoU);
+			model.addAttribute("user",result);
+			model.addAttribute("error","Medicamento solicitado");
+			return this.medicamentos(model);
+		}
+		model.addAttribute("error","Datos incorrectos");
+		return "login3";
+	}
+	@RequestMapping(value = "/registro")
 	public String registro() {
-		return "registroUsuario";
+		return "registro";
 	}
 	@RequestMapping(value = "/verfarmacia", method= RequestMethod.GET)
 	public String farmacia(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
@@ -114,6 +128,21 @@ public class FarmaciaController {
 	@RequestMapping(value = "/login")
 	public String login() {
 		return "login";
+	}@RequestMapping(value = "/loginuser", method= RequestMethod.GET)
+	public String login3(@RequestParam(value="id", required=false) int id,Model model) throws SQLException {
+		Farmaciaxmedicamento farmed = farmaciaxmedicamentoService.findById(id);
+		medicamentoU.setFarmaciaxmedicamento(farmed);
+		if (model.containsAttribute("user")) {
+			System.out.println("index!********************");
+			Map modelmap = model.asMap();
+			Usuario user = (Usuario)modelmap.get("user");
+			medicamentoU.setUsuario(user);
+			medicamentoxusuarioService.add(medicamentoU);
+			model.addAttribute("error","Medicamento solicitado");
+			return this.medicamentos(model);
+		}
+		model.addAttribute("error","Requiere inicio de sesión");
+		return "login3";
 	}
 	@RequestMapping(value = "/agregarUsuarios")
 	public String agregarUser() {
@@ -122,6 +151,37 @@ public class FarmaciaController {
 	@RequestMapping(value = "/agregarMedicamentos")
 	public String agregarMedicamentos() {
 		return "agregar-medicamentos";
+	}@RequestMapping(value= "/nuevouser", method= RequestMethod.POST)
+	public String nuevoUser(@RequestParam(value="nombres-usuarios", required=false, defaultValue="World") String nombre,
+			@RequestParam(value="apellido-paterno-usuarios",	required=false, defaultValue="World") String app,
+			@RequestParam(value="apellido-materno-usuarios",	required=false, defaultValue="World") String apm,
+			@RequestParam(value="rut-usuarios",	required=false, defaultValue="World") String rut,
+			@RequestParam(value="email-usuarios",	required=false, defaultValue="World") String email,
+			@RequestParam(value="direccion-usuarios",	required=false, defaultValue="World") String dir,
+			@RequestParam(value="telefono-usuarios",	required=false, defaultValue="World") int tel,
+			@RequestParam(value="contrasena-usuarios",	required=false, defaultValue="World") String pass,Model model) throws SQLException {
+		Usuario user= new Usuario();
+		user.setCorreo(email);
+		user.setClave(pass);
+		user.setRut(rut);
+		user.setNombre(nombre);
+		user.setApellidoPaterno(app);
+		user.setApellidoMaterno(apm);
+		user.setTelefono(tel);
+		user.setDireccion(dir);
+		
+		/*UsuarioDAO userDao = new UsuarioDAO();
+		int result =userDao.create(user);*/
+		Usuario result = usuarioService.add(user);
+		if(result !=null) {
+			medicamentoU.setUsuario(result);
+			medicamentoxusuarioService.add(medicamentoU);	
+			model.addAttribute("user",result);
+			model.addAttribute("error","Medicamento solicitado");
+			return this.medicamentos(model);
+		}
+		model.addAttribute("error","No se agrego registro");
+		return "agregar-usuarios";
 	}
 	@RequestMapping(value= "/addUser", method= RequestMethod.POST)
 	public String addUser(@RequestParam(value="nombres-usuarios", required=false, defaultValue="World") String nombre,
@@ -192,6 +252,7 @@ public class FarmaciaController {
 		/*MedicamentoDAO medDao = new MedicamentoDAO();
 		int result =medDao.create(med);*/
 		if(result !=null) {
+			
 			model.addAttribute("error","Se agrego registro");
 			return verMedicamento(model);
 		}

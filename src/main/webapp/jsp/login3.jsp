@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Registro usuario</title>
+    <title>Ingreso al Sistema</title>
 	<link rel="icon" type="image/gif" href="img/icono.png" />
 
     <!-- Bootstrap Core CSS -->
@@ -105,63 +105,49 @@ to {
 
 <body  Onload="myFunction();" id="page-top" class="index">
 
-    <!-- Navigation -->
-   <jsp:include page="layout2.jsp"/>
+    
+<c:if test="${error!=null}">
+
+				<div id="snackbar" class="alert alert-warning">${error}</div>
+			</c:if>
+			<jsp:include page="layout2.jsp"/>
+           
 
     <!-- Header -->
     <header>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <img class="img-responsive" src="img/registro-usuario.png" alt="">
+                    <img class="img-responsive" src="img/login-blanco.png" alt="">
                     <div class="intro-text">
                         <hr class="star-light">
                     </div>
                 </div>
 
-			<c:if test="${error!=null}">
+				
 
-				<div id="snackbar" class="alert alert-warning">${error}</div>
-			</c:if>	
-<form role="form" method="post" action="nuevouser">
-                                        
-                                        <div class="form-group form-group-lg">
-                                            <h4><label >Nombres</label></h4>
-                                            <input class="form-control" placeholder="Ingrese su nombre" name="nombres-usuarios" id="">
-                                        </div>
-										<div class="form-group form-group-lg">
-                                            <h4><label>Apellido Paterno</label></h4>
-                                            <input class="form-control" placeholder="Ingrese su apellido paterno" name="apellido-paterno-usuarios" id="">
-                                        </div>
-										<div class="form-group form-group-lg">
-                                           <h4> <label>Apellido Materno</label></h4>
-                                            <input class="form-control" placeholder="Ingrese su apellido materno" name="apellido-materno-usuarios" id="">
-                                        </div>
-										<div class="form-group form-group-lg">
-                                           <h4> <label>Rut</label></h4>
-                                            <input class="form-control" placeholder="Ingrese su rut" name="rut-usuarios" id="">
-                                        </div>
-										<div class="form-group form-group-lg">
-                                            <h4><label >Correo Electronico</label></h4>
-                                            <input class="form-control" placeholder="Ingrese su correo electronico" name="email-usuarios" id="">
-                                        </div>
-								        <div class="form-group form-group-lg">
-                                           <h4> <label>Dirección</label></h4>
-                                            <input class="form-control" placeholder="Ingrese su direcciÃ³n" name="direccion-usuarios" id="">
-                                        </div>                                
-                                        <div class="form-group form-group-lg">
-                                            <h4><label>Telefono</label></h4>
-                                            <input class="form-control" placeholder="Ingrese su numero telefonico" name="telefono-usuarios" id="">
-                                        </div>
-										<div class="form-group form-group-lg">
-                                           <h4> <label>Contraseña</label></h4>
-                                            <input class="form-control" placeholder="Ingrese su contraseÃ±a" name="contrasena-usuarios" id="">
-                                        </div>
-                                        <button type="submit" class="btn btn-default">Enviar</button>
-                                        <button type="reset" class="btn btn-default">Borrar todo el formulario</button>
-										
-                                    </form>
-									<br>
+				
+				<form class="form-horizontal" method="post" action="loginUsuario">
+						  <div class="form-group form-group-lg">
+							<label class="col-sm-2 control-label" for="formGroupInputLarge">Correo</label>
+							<div class="col-sm-10">
+							  <input class="form-control" name="user" type="text" id="formGroupInputLarge" placeholder="ejemplo@ejemplo.cl">
+							</div>
+						  </div>
+						  <div class="form-group form-group-lg">
+							<label class="col-sm-2 control-label" for="formGroupInputSmall">Contraseña</label>
+							<div class="col-sm-10">
+							  <input class="form-control" name="pass" type="password" id="formGroupInputSmall" placeholder="***********">
+							</div>
+						  </div>
+
+					  <input class="btn btn-default" type="submit" value="Ingresar">
+
+				</form>
+
+				<br>
+				<p>¿No tienes cuenta? Registrate aca</p> 
+				<a class="btn btn-default" href="registro" role="button">Registrate!</a>
 
 				
 				</div>

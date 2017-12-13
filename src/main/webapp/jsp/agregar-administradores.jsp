@@ -45,7 +45,7 @@
                                             <input class="form-control" placeholder="Ingrese su numero telefonico" name="telefono-administradores" id="">
                                         </div>
 										<div class="form-group">
-                                            <label>Contraseña</label>
+                                            <label>Contrase�a</label>
                                             <input class="form-control" placeholder="Ingrese su contraseña" name="contrasena-administradores" id="">
                                         </div>
 

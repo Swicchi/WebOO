@@ -8,4 +8,5 @@ public interface UsuarioService {
 	Usuario add(Usuario inv);
 	Usuario edit(Usuario inv);
 	void delete(Integer id);
+	Usuario login(String user, String clave);
 }
