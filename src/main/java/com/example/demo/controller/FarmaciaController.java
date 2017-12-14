@@ -97,7 +97,11 @@ public class FarmaciaController {
 		return inicio(model);
 	}
 	@RequestMapping(value = "/main")
-	public String main() {
+	public String main(Model model) {
+		if(admin==null) {
+			model.addAttribute("error","Requiere Iniciar Sesión ");
+			return "login";
+		}
 		return "main";
 	}
 	@RequestMapping(value= "/loginAdmin", method= RequestMethod.POST)
@@ -110,7 +114,7 @@ public class FarmaciaController {
 		Administrador result =administradorService.login(correo,pass);
 		if(result!=null) {
 			admin = result;
-			return main();
+			return main(model);
 		}
 		
 		model.addAttribute("usuario",medicamentoU.getUsuario());

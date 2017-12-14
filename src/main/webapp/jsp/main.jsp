@@ -9,9 +9,9 @@
                         <h1 class="page-header">Bienvenido </h1>
                     </div>
                     <!-- /.col-lg-12 -->
-					<p> 
-					Administracion de Sistema de Farmacias de la ciudad de Chillán</p>
+				
                 </div>
+                <center><img class="img-responsive" src="img/1111.png" alt=""></center>
                 <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
