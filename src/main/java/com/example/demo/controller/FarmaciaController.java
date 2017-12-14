@@ -35,6 +35,7 @@ public class FarmaciaController {
 	private UsuarioService usuarioService;
 	
 	private Medicamentoxusuario medicamentoU = new Medicamentoxusuario(); 
+	private Administrador admin;
 	@RequestMapping(value = "/")
 	public String index(Model model) throws SQLException {
 
@@ -49,7 +50,7 @@ public class FarmaciaController {
 	}
 	@RequestMapping(value = "/inicio")
 	public String inicio(Model model) throws SQLException {
-
+		admin=null;
 		Farmacia farmacia = farmaciaService.readTurno();
 		if(farmacia != null) {
 			model.addAttribute("turno",farmacia.getNombre());
@@ -108,9 +109,10 @@ public class FarmaciaController {
 		AdministradorDAO adminDao = new AdministradorDAO();*/
 		Administrador result =administradorService.login(correo,pass);
 		if(result!=null) {
+			admin = result;
 			return main();
 		}
-
+		
 		model.addAttribute("usuario",medicamentoU.getUsuario());
 		model.addAttribute("error","Datos incorrectos");
 		return "login";
@@ -161,6 +163,7 @@ public class FarmaciaController {
 	}@RequestMapping(value = "/loginuser", method= RequestMethod.GET)
 	public String login3(@RequestParam(value="id", required=false) int id,Model model) throws SQLException {
 		Farmaciaxmedicamento farmed = farmaciaxmedicamentoService.findById(id);
+		model.addAttribute("usuario",medicamentoU.getUsuario());
 		medicamentoU.setFarmaciaxmedicamento(farmed);
 		if (medicamentoU.getUsuario()!=null) {
 			System.out.println("index!********************");
@@ -174,19 +177,30 @@ public class FarmaciaController {
 			model.addAttribute("error","Medicamento solicitado");
 			return "solicitud";
 		}
-		model.addAttribute("error","Requiere inicio de sesión");
 		return "login3";
 	}
 	@RequestMapping(value = "/agregarUsuarios")
-	public String agregarUser() {
+	public String agregarUser(Model model) {
+		if(admin==null) {
+			model.addAttribute("error","Requiere Iniciar Sesión ");
+			return "login";
+		}
 		return "agregar-usuarios";
 	}
 	@RequestMapping(value = "/agregarMedicamentos")
-	public String agregarMedicamentos() {
+	public String agregarMedicamentos(Model model) {
+		if(admin==null) {
+			model.addAttribute("error","Requiere Iniciar Sesión ");
+			return "login";
+		}
 		return "agregar-medicamentos";
 	}
 	@RequestMapping(value = "/agregarFarmacias")
 	public String agregarfar(Model model) {
+		if(admin==null) {
+			model.addAttribute("error","Requiere Iniciar Sesión ");
+			return "login";
+		}
 		Iterable<Administrador> admins = administradorService.findAll();
 		if(admins!=null) {
 		
@@ -197,7 +211,11 @@ public class FarmaciaController {
 		return "main";
 	}
 	@RequestMapping(value = "/agregarAdministradores")
-	public String agregaradm() {
+	public String agregaradm(Model model) {
+		if(admin==null) {
+			model.addAttribute("error","Requiere Iniciar Sesión ");
+			return "login";
+		}
 		return "agregar-administradores";
 	}
 	@RequestMapping(value= "/nuevouser", method= RequestMethod.POST)
@@ -434,6 +452,11 @@ public class FarmaciaController {
 
 		MedicamentoDAO medDao = new MedicamentoDAO();
 		med = medDao.readAll();*/
+		
+			if(admin==null) {
+				model.addAttribute("error","Requiere Iniciar Sesión ");
+				return "login";
+			}
 		Iterable<Medicamento> medicamentos = medicamentoService.findAll();
 		if(medicamentos!=null) {
 		
@@ -449,6 +472,10 @@ public class FarmaciaController {
 
 		UsuarioDAO userDao = new UsuarioDAO();
 		user = userDao.readAll();*/
+		if(admin==null) {
+			model.addAttribute("error","Requiere Iniciar Sesión ");
+			return "login";
+		}
 		Iterable<Usuario> usuarios = usuarioService.findAll();
 		if(usuarios!=null) {
 		
@@ -464,6 +491,10 @@ public class FarmaciaController {
 
 		UsuarioDAO userDao = new UsuarioDAO();
 		user = userDao.readAll();*/
+		if(admin==null) {
+			model.addAttribute("error","Requiere Iniciar Sesión ");
+			return "login";
+		}
 		Iterable<Administrador> admins = administradorService.findAll();
 		if(admins!=null) {
 		
@@ -479,6 +510,10 @@ public class FarmaciaController {
 
 		UsuarioDAO userDao = new UsuarioDAO();
 		user = userDao.readAll();*/
+		if(admin==null) {
+			model.addAttribute("error","Requiere Iniciar Sesión ");
+			return "login";
+		}
 		Iterable<Farmacia> farm = farmaciaService.findAll();
 		if(farm!=null) {
 		
@@ -494,6 +529,10 @@ public class FarmaciaController {
 
 		UsuarioDAO userDao = new UsuarioDAO();
 		user = userDao.readAll();*/
+		if(admin==null) {
+			model.addAttribute("error","Requiere Iniciar Sesión ");
+			return "login";
+		}
 		Iterable<Medicamentoxusuario> med = medicamentoxusuarioService.findAll();
 		if(med!=null) {
 		
@@ -520,7 +559,6 @@ public class FarmaciaController {
 			model.addAttribute("error","No hay datos");
 			return inicio(model);
 		}
-		model.addAttribute("error","Requiere inicio de sesión");
 		return "login3";
 	}
 	@RequestMapping(value= "/editmed", method= RequestMethod.GET)
@@ -530,6 +568,10 @@ public class FarmaciaController {
 		MedicamentoDAO medDao = new MedicamentoDAO();
 		med = medDao.read(med);
 		if(med!=null) {*/
+		if(admin==null) {
+			model.addAttribute("error","Requiere Iniciar Sesión ");
+			return "login";
+		}
 		Medicamento med = medicamentoService.findById(id);
 		if(med!=null) {
 		model.addAttribute("med",med);
@@ -539,28 +581,40 @@ public class FarmaciaController {
 	}
 	@RequestMapping(value= "/deletemed", method= RequestMethod.GET)
 	public String eliminarMedicamento(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
-		
+		if(admin==null) {
+			model.addAttribute("error","Requiere Iniciar Sesión ");
+			return "login";
+		}
 		medicamentoService.delete(id);
 		model.addAttribute("error","Se eliminó registro");
 		return this.verMedicamento(model);
 	}
 	@RequestMapping(value= "/deletefarm", method= RequestMethod.GET)
 	public String deletefarm(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
-		
+		if(admin==null) {
+			model.addAttribute("error","Requiere Iniciar Sesión ");
+			return "login";
+		}
 		farmaciaService.delete(id);
 		model.addAttribute("error","Se eliminó registro");
 		return this.verFarmacias(model);
 	}
 	@RequestMapping(value= "/estadofarm", method= RequestMethod.GET)
 	public String estadofarm(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
-		
+		if(admin==null) {
+			model.addAttribute("error","Requiere Iniciar Sesión ");
+			return "login";
+		}
 		farmaciaService.cambiarEstado(id);
 		model.addAttribute("error","Se actualizó registro");
 		return this.verFarmacias(model);
 	}
 	@RequestMapping(value= "/deleteadmin", method= RequestMethod.GET)
 	public String deleteadmin(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
-		
+		if(admin==null) {
+			model.addAttribute("error","Requiere Iniciar Sesión ");
+			return "login";
+		}
 		administradorService.delete(id);
 		model.addAttribute("error","Se eliminó registro");
 		return this.verAdministradores(model);
@@ -571,6 +625,10 @@ public class FarmaciaController {
 		user.setIdUsuario(id);
 		UsuarioDAO userDao = new UsuarioDAO();
 		user = userDao.read(user);*/
+		if(admin==null) {
+			model.addAttribute("error","Requiere Iniciar Sesión ");
+			return "login";
+		}
 		Usuario user = usuarioService.findById(id);
 		if(user!=null) {
 		model.addAttribute("user",user);
@@ -584,6 +642,10 @@ public class FarmaciaController {
 		user.setIdUsuario(id);
 		UsuarioDAO userDao = new UsuarioDAO();
 		user = userDao.read(user);*/
+		if(admin==null) {
+			model.addAttribute("error","Requiere Iniciar Sesión ");
+			return "login";
+		}
 		Administrador admin = administradorService.findById(id);
 		if(admin!=null) {
 		model.addAttribute("admin",admin);
@@ -597,6 +659,10 @@ public class FarmaciaController {
 		user.setIdUsuario(id);
 		UsuarioDAO userDao = new UsuarioDAO();
 		user = userDao.read(user);*/
+		if(admin==null) {
+			model.addAttribute("error","Requiere Iniciar Sesión ");
+			return "login";
+		}
 		Farmacia farm = farmaciaService.findById(id);
 		if(farm!=null) {
 		model.addAttribute("farmacia",farm);
@@ -616,6 +682,10 @@ public class FarmaciaController {
 		return this.verUsuarios(model);
 		}
 		model.addAttribute("error","No se elimino registro");*/
+		if(admin==null) {
+			model.addAttribute("error","Requiere Iniciar Sesión ");
+			return "login";
+		}
 		usuarioService.delete(id);
 		model.addAttribute("error","Se eliminó registro");
 		return this.verUsuarios(model);

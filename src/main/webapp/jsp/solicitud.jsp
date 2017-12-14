@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Consulta Farmacias</title>
+    <title>Solicitud</title>
 	<link rel="icon" type="image/gif" href="img/icono.png" />
 
     		<!-- DataTable CSS -->
