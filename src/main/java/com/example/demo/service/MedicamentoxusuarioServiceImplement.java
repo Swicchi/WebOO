@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.Medicamentoxusuario;
+import com.example.demo.domain.Usuario;
 import com.example.demo.repository.MedicamentoxusuarioRepository;
 @Service
 public class MedicamentoxusuarioServiceImplement implements MedicamentoxusuarioService{
@@ -28,5 +29,11 @@ public class MedicamentoxusuarioServiceImplement implements MedicamentoxusuarioS
 	}
 	public void delete(Integer id) {
 		medicamentoxusuarioRepository.delete(id);
+	}
+
+
+	public Iterable<Medicamentoxusuario> findAllxUser(Usuario usuario) {
+		// TODO Auto-generated method stub
+		return medicamentoxusuarioRepository.findAllxUser(usuario);
 	}
 }

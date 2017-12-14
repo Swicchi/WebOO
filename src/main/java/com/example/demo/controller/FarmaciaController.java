@@ -43,7 +43,8 @@ public class FarmaciaController {
 			model.addAttribute("turno",farmacia.getNombre());
 			model.addAttribute("id",farmacia.getIdFarmacia());
 		}
-		
+
+		model.addAttribute("usuario",medicamentoU.getUsuario());
 		return "index";
 	}
 	@RequestMapping(value = "/inicio")
@@ -54,24 +55,45 @@ public class FarmaciaController {
 			model.addAttribute("turno",farmacia.getNombre());
 			model.addAttribute("id",farmacia.getIdFarmacia());
 		}
-		
+
+		model.addAttribute("usuario",medicamentoU.getUsuario());
 		return "index";
+	}
+	@RequestMapping(value = "/signout")
+	public String signout(Model model) throws SQLException {
+		medicamentoU.setUsuario(null);
+		Farmacia farmacia = farmaciaService.readTurno();
+		if(farmacia != null) {
+			model.addAttribute("turno",farmacia.getNombre());
+			model.addAttribute("id",farmacia.getIdFarmacia());
+		}
+
+		model.addAttribute("usuario",medicamentoU.getUsuario());
+		model.addAttribute("error","Sesión Cerrada");
+		return inicio(model);
 	}
 	@RequestMapping(value = "/farmacias")
 	public String farmacia(Model model) throws SQLException {
 		Iterable<Farmacia> farmacias = farmaciaService.findAll();
+		model.addAttribute("usuario",medicamentoU.getUsuario());
 		if(farmacias!=null) {
 		model.addAttribute("list",farmacias);
-		}
 		return "farmacias";
+		}
+		model.addAttribute("error","No hay datos");
+		return inicio(model);
+		
 	}
 	@RequestMapping(value = "/medicamentos")
 	public String medicamentos(Model model) throws SQLException {
 		Iterable<Medicamento> medicamentos = medicamentoService.findAll();
+		model.addAttribute("usuario",medicamentoU.getUsuario());
 		if(medicamentos!=null) {
 		model.addAttribute("list",medicamentos);
-		}
 		return "medicamentos";
+		}
+		model.addAttribute("error","No hay datos");
+		return inicio(model);
 	}
 	@RequestMapping(value = "/main")
 	public String main() {
@@ -88,6 +110,8 @@ public class FarmaciaController {
 		if(result!=null) {
 			return main();
 		}
+
+		model.addAttribute("usuario",medicamentoU.getUsuario());
 		model.addAttribute("error","Datos incorrectos");
 		return "login";
 	}
@@ -99,19 +123,23 @@ public class FarmaciaController {
 		admin.setClave(pass);
 		AdministradorDAO adminDao = new AdministradorDAO();*/
 		Usuario result =usuarioService.login(correo,pass);
+
+		model.addAttribute("usuario",medicamentoU.getUsuario());
 		if(result!=null) {
 			medicamentoU.setUsuario(result);
-			Medicamentoxusuario medu = medicamentoxusuarioService.add(medicamentoU);
-			model.addAttribute("medu",medu);
 			model.addAttribute("user",result);
-			model.addAttribute("error","Medicamento solicitado");
-			return "solicitud";
+			model.addAttribute("medu",medicamentoU);
+			model.addAttribute("usuario",medicamentoU.getUsuario());
+			model.addAttribute("error","Sesión iniciada");
+			return inicio(model);
 		}
 		model.addAttribute("error","Datos incorrectos");
 		return "login3";
 	}
 	@RequestMapping(value = "/registro")
-	public String registro() {
+	public String registro(Model model) {
+
+		model.addAttribute("usuario",medicamentoU.getUsuario());
 		return "registro";
 	}
 	@RequestMapping(value = "/verfarmacia", method= RequestMethod.GET)
@@ -127,20 +155,24 @@ public class FarmaciaController {
 		return "farmaciadetalle";
 	}
 	@RequestMapping(value = "/login")
-	public String login() {
+	public String login(Model model) {
+		model.addAttribute("usuario",medicamentoU.getUsuario());
 		return "login";
 	}@RequestMapping(value = "/loginuser", method= RequestMethod.GET)
 	public String login3(@RequestParam(value="id", required=false) int id,Model model) throws SQLException {
 		Farmaciaxmedicamento farmed = farmaciaxmedicamentoService.findById(id);
 		medicamentoU.setFarmaciaxmedicamento(farmed);
-		if (model.containsAttribute("user")) {
+		if (medicamentoU.getUsuario()!=null) {
 			System.out.println("index!********************");
 			/*Map modelmap = model.asMap();
 			Usuario user = (Usuario)modelmap.get("user");
-			medicamentoU.setUsuario(user);
-			medicamentoxusuarioService.add(medicamentoU);
 			model.addAttribute("error","Medicamento solicitado");*/
-			return this.medicamentos(model);
+			Medicamentoxusuario medU = medicamentoxusuarioService.add(medicamentoU);
+			medicamentoU = new Medicamentoxusuario();
+			medicamentoU.setUsuario(medU.getUsuario());
+			model.addAttribute("medu",medicamentoU);	
+			model.addAttribute("error","Medicamento solicitado");
+			return "solicitud";
 		}
 		model.addAttribute("error","Requiere inicio de sesión");
 		return "login3";
@@ -190,13 +222,14 @@ public class FarmaciaController {
 		/*UsuarioDAO userDao = new UsuarioDAO();
 		int result =userDao.create(user);*/
 		Usuario result = usuarioService.add(user);
+
+		model.addAttribute("usuario",medicamentoU.getUsuario());
 		if(result !=null) {
 			medicamentoU.setUsuario(result);
-			Medicamentoxusuario medu = medicamentoxusuarioService.add(medicamentoU);
-			model.addAttribute("medu",medu);	
+			model.addAttribute("medu",medicamentoU);	
 			model.addAttribute("user",result);
-			model.addAttribute("error","Medicamento solicitado");
-			return "solicitud";
+			model.addAttribute("error","Usuario Registrado");
+			return "login3";
 		}
 		model.addAttribute("error","No se agregó registro");
 		return "agregar-usuarios";
@@ -408,7 +441,7 @@ public class FarmaciaController {
 			return "ver-medicamentos";
 		}
 		model.addAttribute("error","No hay datos");
-		return "ver-medicamentos";
+		return "main";
 	}
 	@RequestMapping(value= "/verUsuarios")
 	public String verUsuarios(Model model) throws SQLException {
@@ -423,7 +456,7 @@ public class FarmaciaController {
 			return "ver-usuarios";
 		}
 		model.addAttribute("error","No hay datos");
-		return "ver-usuarios";
+		return "main";
 	}
 	@RequestMapping(value= "/verAdministradores")
 	public String verAdministradores(Model model) throws SQLException {
@@ -438,7 +471,7 @@ public class FarmaciaController {
 			return "ver-administradores";
 		}
 		model.addAttribute("error","No hay datos");
-		return "ver-administradores";
+		return "main";
 	}
 	@RequestMapping(value= "/verfarmacias")
 	public String verFarmacias(Model model) throws SQLException {
@@ -453,7 +486,7 @@ public class FarmaciaController {
 			return "ver-farmacias";
 		}
 		model.addAttribute("error","No hay datos");
-		return "ver-farmacias";
+		return "main";
 	}
 	@RequestMapping(value= "/verMedicamentosSol")
 	public String verMed(Model model) throws SQLException {
@@ -468,7 +501,27 @@ public class FarmaciaController {
 			return "ver-solicitudes";
 		}
 		model.addAttribute("error","No hay datos");
-		return "ver-solicitudes";
+		return "main";
+	}
+	@RequestMapping(value= "/verMedicamentosSolxUser")
+	public String verMedu(Model model) throws SQLException {
+		/*LinkedList<UsuarioTO> user= new LinkedList<>();
+
+		UsuarioDAO userDao = new UsuarioDAO();
+		user = userDao.readAll();*/
+		model.addAttribute("usuario",medicamentoU.getUsuario());
+		if(medicamentoU.getUsuario()!=null) {
+		Iterable<Medicamentoxusuario> med = medicamentoxusuarioService.findAllxUser(medicamentoU.getUsuario());
+		if(med!=null) {
+		
+			model.addAttribute("list",med);
+			return "historial";
+		}
+			model.addAttribute("error","No hay datos");
+			return inicio(model);
+		}
+		model.addAttribute("error","Requiere inicio de sesión");
+		return "login3";
 	}
 	@RequestMapping(value= "/editmed", method= RequestMethod.GET)
 	public String editarMedicamento(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {

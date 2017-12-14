@@ -1,4 +1,5 @@
 <!-- Navigation -->
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
 	<nav id="mainNav"
 		class="navbar navbar-default navbar-fixed-top navbar-custom">
 		<div class="container">
@@ -17,11 +18,23 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="hidden"><a href="#page-top"></a></li>
+					
 					<li class="page-scroll"><a href="medicamentos">Consulta
 							medicamentos</a></li>
 					<li class="page-scroll"><a href="farmacias">Farmacias
 							Asociadas</a></li>
+							<c:if test="${usuario!=null}">
+							
+					<li class="page-scroll"><a href="verMedicamentosSolxUser">Historial</a></li>
+					<li class="page-scroll"><a href="signout">Cerrar Sesión</a></li>
+					</c:if>
+					<c:if test="${usuario==null}">
+							
+					<li class="page-scroll"><a href="verMedicamentosSolxUser">Ingreso Usuario</a></li>
+					</c:if>
 					<li class="page-scroll"><a href="login">Ingreso Administrador</a></li>
+					
+					
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->

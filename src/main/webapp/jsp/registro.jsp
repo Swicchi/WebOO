@@ -187,7 +187,7 @@ to {
                                         </div>
 										<div class="form-group form-group-lg">
                                             <label>Rut</label>
-                                            <input class="form-control" max="15" required oninput=" return checkRut(this)"  placeholder="Ingrese su rut" name="rut-usuarios" id="">
+                                            <input class="form-control"  required oninput=" return checkRut(this)"  placeholder="Ingrese su rut" name="rut-usuarios" id="">
                                         </div>
 										<div class="form-group form-group-lg">
                                             <label>Correo Electronico</label>

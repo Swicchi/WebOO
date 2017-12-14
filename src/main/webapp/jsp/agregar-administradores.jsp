@@ -30,7 +30,7 @@
                                         </div>
 										<div class="form-group">
                                             <label>Rut</label>
-                                            <input class="form-control" required  placeholder="Ingrese su rut" name="rut-administradores" id="">
+                                            <input class="form-control" required oninput=" return checkRut(this)"  placeholder="Ingrese su rut" name="rut-administradores" id="">
                                         </div>
 										<div class="form-group">
                                             <label>Correo Electronico</label>
