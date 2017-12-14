@@ -177,7 +177,7 @@ public class FarmaciaController {
 			Medicamentoxusuario medU = medicamentoxusuarioService.add(medicamentoU);
 			medicamentoU = new Medicamentoxusuario();
 			medicamentoU.setUsuario(medU.getUsuario());
-			model.addAttribute("medu",medicamentoU);	
+			model.addAttribute("medu",medU);	
 			model.addAttribute("error","Medicamento solicitado");
 			return "solicitud";
 		}

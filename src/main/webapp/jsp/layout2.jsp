@@ -31,8 +31,9 @@
 					<c:if test="${usuario==null}">
 							
 					<li class="page-scroll"><a href="verMedicamentosSolxUser">Ingreso Usuario</a></li>
-					</c:if>
 					<li class="page-scroll"><a href="login">Ingreso Administrador</a></li>
+					</c:if>
+					
 					
 					
 				</ul>

@@ -120,11 +120,24 @@ to {
 					<img class="img-responsive" src="img/1111.png" alt="">
 					<div class="intro-text">
 						<hr class="star-light">
-						<span class="skills">Farmacia de turno:  ${turno} </span>
+						<h1><span>Farmacia de turno:  ${turno} </span></h1>
 					</div>
 				</div>
 			</div>
 		</div>
+		<br>
+			<br>
+				<br>
+					<br>
+						<br>
+							<br>
+								<br>
+									<br>
+										<br>
+											<br>
+												<br>
+															
+												<br>			
 	</header>
 
 
