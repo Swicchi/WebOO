@@ -14,39 +14,39 @@
                         <h1 class="page-header">Agregar administradores</h1>
                     </div>
                     <!-- /.col-lg-12 -->
-					<form role="form">
+					<form role="form" action="addAdmin" method="post">
                                         
                                         <div class="form-group">
                                             <label>Nombres</label>
-                                            <input class="form-control" placeholder="Ingrese su nombre" name="nombres-administradores" id="">
+                                            <input class="form-control" required placeholder="Ingrese su nombre" name="nombres-administradores" id="">
                                         </div>
 										<div class="form-group">
                                             <label>Apellido Paterno</label>
-                                            <input class="form-control" placeholder="Ingrese su apellido paterno" name="apellido-paterno-administradores" id="">
+                                            <input class="form-control" required placeholder="Ingrese su apellido paterno" name="apellido-paterno-administradores" id="">
                                         </div>
 										<div class="form-group">
                                             <label>Apellido Materno</label>
-                                            <input class="form-control" placeholder="Ingrese su apellido materno" name="apellido-materno-administradores" id="">
+                                            <input class="form-control" required  placeholder="Ingrese su apellido materno" name="apellido-materno-administradores" id="">
                                         </div>
 										<div class="form-group">
                                             <label>Rut</label>
-                                            <input class="form-control" placeholder="Ingrese su rut" name="rut-administradores" id="">
+                                            <input class="form-control" required  placeholder="Ingrese su rut" name="rut-administradores" id="">
                                         </div>
 										<div class="form-group">
                                             <label>Correo Electronico</label>
-                                            <input class="form-control" placeholder="Ingrese su correo electronico" name="email-administradores" id="">
+                                            <input class="form-control" type="email"  required  placeholder="Ingrese su correo electronico" name="email-administradores" id="">
                                         </div>
 								        <div class="form-group">
                                             <label>DirecciÃ³n</label>
-                                            <input class="form-control" placeholder="Ingrese su direcciÃ³n" name="direccion-administradores" id="">
+                                            <input class="form-control" required  placeholder="Ingrese su dirección" name="direccion-administradores" id="">
                                         </div>                                
                                         <div class="form-group">
                                             <label>Telefono</label>
-                                            <input class="form-control" placeholder="Ingrese su numero telefonico" name="telefono-administradores" id="">
+                                            <input class="form-control" type="number"  required placeholder="Ingrese su numero telefonico" name="telefono-administradores" id="">
                                         </div>
 										<div class="form-group">
                                             <label>Contraseña</label>
-                                            <input class="form-control" placeholder="Ingrese su contraseÃ±a" name="contrasena-administradores" id="">
+                                            <input class="form-control" minlength="8" type="password" required  placeholder="Ingrese su contraseña" name="contrasena-administradores" id="">
                                         </div>
 
                                         <button type="submit" class="btn btn-default">Enviar</button>

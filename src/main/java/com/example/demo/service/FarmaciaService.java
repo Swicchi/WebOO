@@ -9,5 +9,6 @@ public interface FarmaciaService {
 	Farmacia add(Farmacia inv);
 	Farmacia edit(Farmacia inv);
 	void delete(Integer id);
+	void cambiarEstado(Integer id);
 	Farmacia readTurno();
 }

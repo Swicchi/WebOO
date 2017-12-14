@@ -108,64 +108,13 @@ to {
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <img class="img-responsive" src="img/consulta-farmacias-blanco.png" alt="">
-					<div class="intro-text">
-
-					<div class="row">
-               <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        
-                        <div class="panel-body">
-                            
-							<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Dirección</th>
-                <th>Estado de Turno</th>
-                
-            </tr>
-        </thead>
-         <tfoot>
-            <tr>
-                <th>Nombre</th>
-                <th>Dirección</th>
-                <th>Estado de Turno</th>
-                
-            </tr>
-        </tfoot>
-        <tbody>
-							<c:forEach var="farmacia" items="${list}">
-								<tr>
-									<td>${farmacia.nombre}</td>
-									<td>${farmacia.ubicacion}</td>
-									<td><c:if
-											test="${farmacia.estadoTurno == 1}">
-											<p>EN TURNO</p>
-											
-										</c:if> <c:if test="${farmacia.estadoTurno != 1}">
-											<p>FUERA DE TURNO</p>
-										</c:if></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-    </table>
-							
-							
-							
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-					
-                        
-                    </div>
-					
-					
-					
+                    
+			<h2>Se ha solicitado el medicamento <b>${medu.farmaciaxmedicamento.medicamento.nombreGenerico}</b></h2>
+					<hr>
+					<h2>perteniciente a la farmacia <b>${medu.farmaciaxmedicamento.farmacia.nombre}</b></h2>
+					<hr>
+					<h2>el medicamento a sido solicitado por <b>${medu.usuario.nombre}</b></h2>
+					<hr>
 					
 					
 					
@@ -199,19 +148,6 @@ to {
 
   <!-- DataTable JavaScript -->
 
-        <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
-        <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
-    <script>
-	$(document).ready(function() {
-    $('#example').DataTable({
-    	responsive: true,
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-        }
-    });
-    
-	} );
-	</script>
 <script>
 		function myFunction() {
 			var x = document.getElementById("snackbar")

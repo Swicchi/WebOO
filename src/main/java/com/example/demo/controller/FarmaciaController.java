@@ -101,10 +101,11 @@ public class FarmaciaController {
 		Usuario result =usuarioService.login(correo,pass);
 		if(result!=null) {
 			medicamentoU.setUsuario(result);
-			medicamentoxusuarioService.add(medicamentoU);
+			Medicamentoxusuario medu = medicamentoxusuarioService.add(medicamentoU);
+			model.addAttribute("medu",medu);
 			model.addAttribute("user",result);
 			model.addAttribute("error","Medicamento solicitado");
-			return this.medicamentos(model);
+			return "solicitud";
 		}
 		model.addAttribute("error","Datos incorrectos");
 		return "login3";
@@ -134,11 +135,11 @@ public class FarmaciaController {
 		medicamentoU.setFarmaciaxmedicamento(farmed);
 		if (model.containsAttribute("user")) {
 			System.out.println("index!********************");
-			Map modelmap = model.asMap();
+			/*Map modelmap = model.asMap();
 			Usuario user = (Usuario)modelmap.get("user");
 			medicamentoU.setUsuario(user);
 			medicamentoxusuarioService.add(medicamentoU);
-			model.addAttribute("error","Medicamento solicitado");
+			model.addAttribute("error","Medicamento solicitado");*/
 			return this.medicamentos(model);
 		}
 		model.addAttribute("error","Requiere inicio de sesión");
@@ -151,7 +152,23 @@ public class FarmaciaController {
 	@RequestMapping(value = "/agregarMedicamentos")
 	public String agregarMedicamentos() {
 		return "agregar-medicamentos";
-	}@RequestMapping(value= "/nuevouser", method= RequestMethod.POST)
+	}
+	@RequestMapping(value = "/agregarFarmacias")
+	public String agregarfar(Model model) {
+		Iterable<Administrador> admins = administradorService.findAll();
+		if(admins!=null) {
+		
+			model.addAttribute("list",admins);
+		return "agregar-farmacias";
+	}
+		model.addAttribute("error","no hay administradores");
+		return "main";
+	}
+	@RequestMapping(value = "/agregarAdministradores")
+	public String agregaradm() {
+		return "agregar-administradores";
+	}
+	@RequestMapping(value= "/nuevouser", method= RequestMethod.POST)
 	public String nuevoUser(@RequestParam(value="nombres-usuarios", required=false, defaultValue="World") String nombre,
 			@RequestParam(value="apellido-paterno-usuarios",	required=false, defaultValue="World") String app,
 			@RequestParam(value="apellido-materno-usuarios",	required=false, defaultValue="World") String apm,
@@ -175,12 +192,13 @@ public class FarmaciaController {
 		Usuario result = usuarioService.add(user);
 		if(result !=null) {
 			medicamentoU.setUsuario(result);
-			medicamentoxusuarioService.add(medicamentoU);	
+			Medicamentoxusuario medu = medicamentoxusuarioService.add(medicamentoU);
+			model.addAttribute("medu",medu);	
 			model.addAttribute("user",result);
 			model.addAttribute("error","Medicamento solicitado");
-			return this.medicamentos(model);
+			return "solicitud";
 		}
-		model.addAttribute("error","No se agrego registro");
+		model.addAttribute("error","No se agregó registro");
 		return "agregar-usuarios";
 	}
 	@RequestMapping(value= "/addUser", method= RequestMethod.POST)
@@ -206,11 +224,70 @@ public class FarmaciaController {
 		int result =userDao.create(user);*/
 		Usuario result = usuarioService.add(user);
 		if(result !=null) {
-			model.addAttribute("error","Se agrego registro");
+			model.addAttribute("error","Se agregó registro");
 			return this.verUsuarios(model);
 		}
-		model.addAttribute("error","No se agrego registro");
+		model.addAttribute("error","No se agregó registro");
 		return "agregar-usuarios";
+	}
+	@RequestMapping(value= "/addAdmin", method= RequestMethod.POST)
+	public String addAdmin(@RequestParam(value="nombres-administradores", required=false, defaultValue="World") String nombre,
+			@RequestParam(value="apellido-paterno-administradores",	required=false, defaultValue="World") String app,
+			@RequestParam(value="apellido-materno-administradores",	required=false, defaultValue="World") String apm,
+			@RequestParam(value="rut-administradores",	required=false, defaultValue="World") String rut,
+			@RequestParam(value="email-administradores",	required=false, defaultValue="World") String email,
+			@RequestParam(value="direccion-administradores",	required=false, defaultValue="World") String dir,
+			@RequestParam(value="telefono-administradores",	required=false, defaultValue="World") int tel,
+			@RequestParam(value="contrasena-administradores",	required=false, defaultValue="World") String pass,Model model) throws SQLException {
+		Administrador admin= new Administrador();
+		admin.setCorreo(email);
+		admin.setClave(pass);
+		admin.setRut(rut);
+		admin.setNombre(nombre);
+		admin.setApellidoPaterno(app);
+		admin.setApellidoMaterno(apm);
+		admin.setTelefono(tel);
+		admin.setDireccion(dir);
+		
+		/*UsuarioDAO userDao = new UsuarioDAO();
+		int result =userDao.create(user);*/
+		Administrador result = administradorService.add(admin);
+		if(result !=null) {
+			model.addAttribute("error","Se agregó registro");
+			return this.verAdministradores(model);
+		}
+		model.addAttribute("error","No se agregó registro");
+		return "agregar-administradores";
+	}
+	@RequestMapping(value= "/modAdmin", method= RequestMethod.POST)
+	public String modAdmin(@RequestParam(value="nombres-administradores", required=false, defaultValue="World") String nombre,
+			@RequestParam(value="apellido-paterno-administradores",	required=false, defaultValue="World") String app,
+			@RequestParam(value="apellido-materno-administradores",	required=false, defaultValue="World") String apm,
+			@RequestParam(value="rut-administradores",	required=false, defaultValue="World") String rut,
+			@RequestParam(value="email-administradores",	required=false, defaultValue="World") String email,
+			@RequestParam(value="direccion-administradores",	required=false, defaultValue="World") String dir,
+			@RequestParam(value="telefono-administradores",	required=false, defaultValue="World") int tel,
+			@RequestParam(value="id",	required=false, defaultValue="World") int id,
+			@RequestParam(value="contrasena-administradores",	required=false, defaultValue="World") String pass,Model model) throws SQLException {
+		Administrador admin= new Administrador();
+		admin.setCorreo(email);
+		admin.setClave(pass);
+		admin.setRut(rut);
+		admin.setNombre(nombre);
+		admin.setApellidoPaterno(app);
+		admin.setApellidoMaterno(apm);
+		admin.setTelefono(tel);
+		admin.setDireccion(dir);
+		admin.setIdAdministrador(id);
+		/*UsuarioDAO userDao = new UsuarioDAO();
+		int result =userDao.create(user);*/
+		Administrador result = administradorService.add(admin);
+		if(result !=null) {
+			model.addAttribute("error","Se modificó registro");
+			return this.verAdministradores(model);
+		}
+		model.addAttribute("error","No se modificó registro");
+		return this.editadmin(id,model);
 	}
 	@RequestMapping(value= "/modUser", method= RequestMethod.POST)
 	public String moduser(@RequestParam(value="nombres-usuarios", required=false, defaultValue="World") String nombre,
@@ -237,10 +314,10 @@ public class FarmaciaController {
 		int result =userDao.update(user);*/
 		Usuario result = usuarioService.edit(user);
 		if(result !=null) {
-			model.addAttribute("error","Se modifico registro");
+			model.addAttribute("error","Se modificó registro");
 			return this.verUsuarios(model);
 		}
-		model.addAttribute("error","No se modifico registro");
+		model.addAttribute("error","No se modificó registro");
 		return editarUser(id,model);
 	}
 	@RequestMapping(value= "/addMedic", method= RequestMethod.POST)
@@ -253,10 +330,10 @@ public class FarmaciaController {
 		int result =medDao.create(med);*/
 		if(result !=null) {
 			
-			model.addAttribute("error","Se agrego registro");
+			model.addAttribute("error","Se agregó registro");
 			return verMedicamento(model);
 		}
-		model.addAttribute("error","No se agrego registro");
+		model.addAttribute("error","No se agregó registro");
 		return "agregar-medicamentos";
 	}
 	@RequestMapping(value= "/modMedic", method= RequestMethod.POST)
@@ -269,14 +346,55 @@ public class FarmaciaController {
 		int result =medDao.update(med);*/
 		Medicamento result = medicamentoService.edit(med);
 		if(result !=null) {
-			model.addAttribute("error","Se modifico registro");
+			model.addAttribute("error","Se modificó registro");
 			return verMedicamento(model);
 			
 		}
 		model.addAttribute("med",med);
-		model.addAttribute("error","No se modifico registro");
+		model.addAttribute("error","No se modificó registro");
 		return editarMedicamento(id,model);
 	}
+	
+	@RequestMapping(value= "/addFarm", method= RequestMethod.POST)
+	public String addFarmacia(@RequestParam(value="nombres-farmacia") String nom,@RequestParam(value="direccion-farmacia") String dir,@RequestParam(value="telefono-farmacia") String telefono,@RequestParam(value="idadmin") int id,Model model) throws SQLException {
+		Farmacia farm= new Farmacia();
+		farm.setNombre(nom);
+		farm.setUbicacion(dir);
+		farm.setTelefono(telefono);
+		farm.setAdministrador(administradorService.findById(id));
+		Farmacia result =farmaciaService.add(farm);
+		/*MedicamentoDAO medDao = new MedicamentoDAO();
+		int result =medDao.create(med);*/
+		if(result !=null) {
+			
+			model.addAttribute("error","Se agregó registro");
+			return verFarmacias(model);
+		}
+		model.addAttribute("error","No se agregó registro");
+		return "agregar-farmacias";
+	}
+	@RequestMapping(value= "/modFarm", method= RequestMethod.POST)
+	public String modFarmacia(@RequestParam(value="nombres-farmacia") String nom,@RequestParam(value="direccion-farmacia") String dir,@RequestParam(value="telefono-farmacia") String telefono,@RequestParam(value="id", required=false, defaultValue="World") int id,@RequestParam(value="idadmin") int ida,Model model) throws SQLException {
+		Farmacia farm= new Farmacia();
+		farm.setNombre(nom);
+		farm.setUbicacion(dir);
+		farm.setTelefono(telefono);
+		farm.setIdFarmacia(id);
+		farm.setAdministrador(administradorService.findById(ida));
+		Farmacia result =farmaciaService.add(farm);
+		/*MedicamentoDAO medDao = new MedicamentoDAO();
+		int result =medDao.update(med);*/
+		
+		if(result !=null) {
+			model.addAttribute("error","Se modificó registro");
+			return verFarmacias(model);
+			
+		}
+		model.addAttribute("med",farm);
+		model.addAttribute("error","No se modificó registro");
+		return editfarm(id, model);
+	}
+	
 	@RequestMapping(value= "/verMedicamentos")
 	public String verMedicamento(Model model) throws SQLException {
 		/*LinkedList<MedicamentoTO> med= new LinkedList<>();
@@ -307,6 +425,51 @@ public class FarmaciaController {
 		model.addAttribute("error","No hay datos");
 		return "ver-usuarios";
 	}
+	@RequestMapping(value= "/verAdministradores")
+	public String verAdministradores(Model model) throws SQLException {
+		/*LinkedList<UsuarioTO> user= new LinkedList<>();
+
+		UsuarioDAO userDao = new UsuarioDAO();
+		user = userDao.readAll();*/
+		Iterable<Administrador> admins = administradorService.findAll();
+		if(admins!=null) {
+		
+			model.addAttribute("list",admins);
+			return "ver-administradores";
+		}
+		model.addAttribute("error","No hay datos");
+		return "ver-administradores";
+	}
+	@RequestMapping(value= "/verfarmacias")
+	public String verFarmacias(Model model) throws SQLException {
+		/*LinkedList<UsuarioTO> user= new LinkedList<>();
+
+		UsuarioDAO userDao = new UsuarioDAO();
+		user = userDao.readAll();*/
+		Iterable<Farmacia> farm = farmaciaService.findAll();
+		if(farm!=null) {
+		
+			model.addAttribute("list",farm);
+			return "ver-farmacias";
+		}
+		model.addAttribute("error","No hay datos");
+		return "ver-farmacias";
+	}
+	@RequestMapping(value= "/verMedicamentosSol")
+	public String verMed(Model model) throws SQLException {
+		/*LinkedList<UsuarioTO> user= new LinkedList<>();
+
+		UsuarioDAO userDao = new UsuarioDAO();
+		user = userDao.readAll();*/
+		Iterable<Medicamentoxusuario> med = medicamentoxusuarioService.findAll();
+		if(med!=null) {
+		
+			model.addAttribute("list",med);
+			return "ver-solicitudes";
+		}
+		model.addAttribute("error","No hay datos");
+		return "ver-solicitudes";
+	}
 	@RequestMapping(value= "/editmed", method= RequestMethod.GET)
 	public String editarMedicamento(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
 		/*MedicamentoTO med= new MedicamentoTO();
@@ -325,8 +488,29 @@ public class FarmaciaController {
 	public String eliminarMedicamento(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
 		
 		medicamentoService.delete(id);
-		model.addAttribute("error","Se elimino registro");
+		model.addAttribute("error","Se eliminó registro");
 		return this.verMedicamento(model);
+	}
+	@RequestMapping(value= "/deletefarm", method= RequestMethod.GET)
+	public String deletefarm(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
+		
+		farmaciaService.delete(id);
+		model.addAttribute("error","Se eliminó registro");
+		return this.verFarmacias(model);
+	}
+	@RequestMapping(value= "/estadofarm", method= RequestMethod.GET)
+	public String estadofarm(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
+		
+		farmaciaService.cambiarEstado(id);
+		model.addAttribute("error","Se actualizó registro");
+		return this.verFarmacias(model);
+	}
+	@RequestMapping(value= "/deleteadmin", method= RequestMethod.GET)
+	public String deleteadmin(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
+		
+		administradorService.delete(id);
+		model.addAttribute("error","Se eliminó registro");
+		return this.verAdministradores(model);
 	}
 	@RequestMapping(value= "/edituser", method= RequestMethod.GET)
 	public String editarUser(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
@@ -341,6 +525,32 @@ public class FarmaciaController {
 		}
 		return "modificar-usuarios";
 	}
+	@RequestMapping(value= "/editadmin", method= RequestMethod.GET)
+	public String editadmin(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
+		/*UsuarioTO user= new UsuarioTO();
+		user.setIdUsuario(id);
+		UsuarioDAO userDao = new UsuarioDAO();
+		user = userDao.read(user);*/
+		Administrador admin = administradorService.findById(id);
+		if(admin!=null) {
+		model.addAttribute("admin",admin);
+		return "modificar-administradores";
+		}
+		return "modificar-administradores";
+	}
+	@RequestMapping(value= "/editfarm", method= RequestMethod.GET)
+	public String editfarm(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
+		/*UsuarioTO user= new UsuarioTO();
+		user.setIdUsuario(id);
+		UsuarioDAO userDao = new UsuarioDAO();
+		user = userDao.read(user);*/
+		Farmacia farm = farmaciaService.findById(id);
+		if(farm!=null) {
+		model.addAttribute("farmacia",farm);
+		return "modificar-farmacias";
+		}
+		return "modificar-farmacias";
+	}
 	@RequestMapping(value= "/deleteuser", method= RequestMethod.GET)
 	public String eliminarUser(@RequestParam(value="id", required=false, defaultValue="World") int id,Model model) throws SQLException {
 		/*UsuarioTO user= new UsuarioTO();
@@ -354,7 +564,7 @@ public class FarmaciaController {
 		}
 		model.addAttribute("error","No se elimino registro");*/
 		usuarioService.delete(id);
-		model.addAttribute("error","Se elimino registro");
+		model.addAttribute("error","Se eliminó registro");
 		return this.verUsuarios(model);
 	}
 	

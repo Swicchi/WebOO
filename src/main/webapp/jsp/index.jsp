@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Sistema de gestiÃ³n de medicamentos</title>
+<title>Sistema de gestión de medicamentos</title>
 <link rel="icon" type="image/gif" href="img/icono.png" />
 
 <!-- Bootstrap Core CSS -->

@@ -130,7 +130,18 @@ to {
        else {
            return false;
        }
-    }
+    }function validar2(){
+        //Ingresamos un mensaje a mostrar
+        var mensaje = confirm('¿Desea cambiar el estado de este registro?');
+        //Detectamos si el usuario acepto el mensaje
+        if (mensaje) {
+            return true;
+        }
+        //Detectamos si el usuario denegó el mensaje
+        else {
+            return false;
+        }
+     }
 function checkRut(rut) {
     // Despejar Puntos
     var valor = rut.value.replace('.','');
@@ -241,10 +252,10 @@ function myFunction() {
                             <a href="#"><i class="fa fa-hospital-o fa-fw"></i> Farmacias<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="ver-farmacias.html">Ver</a>
+                                    <a href="verfarmacias">Ver</a>
                                 </li>
                                 <li>
-                                    <a href="agregar-farmacias.html">Agregar</a>
+                                    <a href="agregarFarmacias">Agregar</a>
                                 </li>
 							
                             </ul>
@@ -254,10 +265,10 @@ function myFunction() {
                             <a href="#"><i class="fa fa-user-md fa-fw"></i> Administradores<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="ver-administradores.html">Ver</a>
+                                    <a href="verAdministradores">Ver</a>
                                 </li>
                                 <li>
-                                    <a href="agregar-administradores.html">Agregar</a>
+                                    <a href="agregarAdministradores">Agregar</a>
                                 </li>
 								
 								
@@ -277,6 +288,9 @@ function myFunction() {
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        <li>
+                                    <a href="verMedicamentosSol"><i class="fa fa-medkit fa-fw"></i> Ver Medicamentos Solicitados</a>
+                                </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

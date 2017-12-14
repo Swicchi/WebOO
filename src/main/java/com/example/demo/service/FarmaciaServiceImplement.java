@@ -32,4 +32,7 @@ public class FarmaciaServiceImplement implements FarmaciaService{
 	public Farmacia readTurno() {
 		return farmaciaRepository.readTurno();
 	};
+	public void cambiarEstado(Integer id) {
+		farmaciaRepository.cambiarEstado(id);
+	};
 }

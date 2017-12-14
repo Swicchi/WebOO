@@ -101,6 +101,54 @@ to {
 }
 }
 </style>
+    <script type="text/javascript">	function checkRut(rut) {
+	    // Despejar Puntos
+	    var valor = rut.value.replace('.','');
+	    // Despejar Guión
+	    valor = valor.replace('-','');
+	    
+	    // Aislar Cuerpo y Dígito Verificador
+	    cuerpo = valor.slice(0,-1);
+	    dv = valor.slice(-1).toUpperCase();
+	    
+	    // Formatear RUN
+	    rut.value = cuerpo + '-'+ dv
+	    
+	    // Si no cumple con el mínimo ej. (n.nnn.nnn)
+	    if(cuerpo.length < 7) { rut.setCustomValidity("RUT Incompleto"); return false;}
+	    
+	    // Calcular Dígito Verificador
+	    suma = 0;
+	    multiplo = 2;
+	    
+	    // Para cada dígito del Cuerpo
+	    for(i=1;i<=cuerpo.length;i++) {
+	    
+	        // Obtener su Producto con el Múltiplo Correspondiente
+	        index = multiplo * valor.charAt(cuerpo.length - i);
+	        
+	        // Sumar al Contador General
+	        suma = suma + index;
+	        
+	        // Consolidar Múltiplo dentro del rango [2,7]
+	        if(multiplo < 7) { multiplo = multiplo + 1; } else { multiplo = 2; }
+	  
+	    }
+	    
+	    // Calcular Dígito Verificador en base al Módulo 11
+	    dvEsperado = 11 - (suma % 11);
+	    
+	    // Casos Especiales (0 y K)
+	    dv = (dv == 'K')?10:dv;
+	    dv = (dv == 0)?11:dv;
+	    
+	    // Validar que el Cuerpo coincide con su Dígito Verificador
+	    if(dvEsperado != dv) { rut.setCustomValidity("RUT Inválido"); return false; }
+	    
+	    // Si todo sale bien, eliminar errores (decretar que es válido)
+	    rut.setCustomValidity('');
+	}
+</script>
 </head>
 
 <body  Onload="myFunction();" id="page-top" class="index">
@@ -124,43 +172,43 @@ to {
 				<div id="snackbar" class="alert alert-warning">${error}</div>
 			</c:if>	
 <form role="form" method="post" action="nuevouser">
-                                        
+                                      
                                         <div class="form-group form-group-lg">
-                                            <h4><label >Nombres</label></h4>
-                                            <input class="form-control" placeholder="Ingrese su nombre" name="nombres-usuarios" id="">
+                                            <label>Nombres</label>
+                                            <input class="form-control" required placeholder="Ingrese su nombre" name="nombres-usuarios" id="">
                                         </div>
 										<div class="form-group form-group-lg">
-                                            <h4><label>Apellido Paterno</label></h4>
-                                            <input class="form-control" placeholder="Ingrese su apellido paterno" name="apellido-paterno-usuarios" id="">
+                                            <label>Apellido Paterno</label>
+                                            <input class="form-control" required placeholder="Ingrese su apellido paterno" name="apellido-paterno-usuarios" id="">
                                         </div>
 										<div class="form-group form-group-lg">
-                                           <h4> <label>Apellido Materno</label></h4>
-                                            <input class="form-control" placeholder="Ingrese su apellido materno" name="apellido-materno-usuarios" id="">
+                                            <label>Apellido Materno</label>
+                                            <input class="form-control" required placeholder="Ingrese su apellido materno" name="apellido-materno-usuarios" id="">
                                         </div>
 										<div class="form-group form-group-lg">
-                                           <h4> <label>Rut</label></h4>
-                                            <input class="form-control" placeholder="Ingrese su rut" name="rut-usuarios" id="">
+                                            <label>Rut</label>
+                                            <input class="form-control" max="15" required oninput=" return checkRut(this)"  placeholder="Ingrese su rut" name="rut-usuarios" id="">
                                         </div>
 										<div class="form-group form-group-lg">
-                                            <h4><label >Correo Electronico</label></h4>
-                                            <input class="form-control" placeholder="Ingrese su correo electronico" name="email-usuarios" id="">
+                                            <label>Correo Electronico</label>
+                                            <input class="form-control" required type="email" placeholder="Ingrese su correo electronico" name="email-usuarios" id="">
                                         </div>
 								        <div class="form-group form-group-lg">
-                                           <h4> <label>Dirección</label></h4>
-                                            <input class="form-control" placeholder="Ingrese su direcciÃ³n" name="direccion-usuarios" id="">
+                                            <label>Dirección</label>
+                                            <input class="form-control" required  placeholder="Ingrese su dirección" name="direccion-usuarios" id="">
                                         </div>                                
                                         <div class="form-group form-group-lg">
-                                            <h4><label>Telefono</label></h4>
-                                            <input class="form-control" placeholder="Ingrese su numero telefonico" name="telefono-usuarios" id="">
+                                            <label>Telefono</label>
+                                            <input class="form-control" required pattern="[9]{1}[0-9]{8}"  maxlength="9" type="number" placeholder="Ingrese su numero telefonico" name="telefono-usuarios" id="">
                                         </div>
 										<div class="form-group form-group-lg">
-                                           <h4> <label>Contraseña</label></h4>
-                                            <input class="form-control" placeholder="Ingrese su contraseÃ±a" name="contrasena-usuarios" id="">
+                                            <label>Contraseña</label>
+                                            <input class="form-control" required  minlength="8" placeholder="Ingrese su contraseña" name="contrasena-usuarios" id="" type="password">
                                         </div>
                                         <button type="submit" class="btn btn-default">Enviar</button>
                                         <button type="reset" class="btn btn-default">Borrar todo el formulario</button>
-										
                                     </form>
+                                      
 									<br>
 
 				

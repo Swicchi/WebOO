@@ -21,28 +21,32 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>Rendering engine</th>
-                                        <th>Browser</th>
-                                        <th>Platform(s)</th>
-                                        <th>Engine version</th>
-                                        <th>CSS grade</th>
-										<th> opciones </th>
+                                    
+                                        <th>Rut</th>
+                                        <th>Nombre</th>
+                                        <th>Apellidos</th>
+                                        <th>Telefono</th>
+                                        <th>Email</th>
+                                        <th>Direccion</th>
+										<th>Opciones </th>
 										
                                     </tr>
                                 </thead>
                                 <tbody>
+                                 <c:forEach var="admin" items="${list}">  
                                     <tr class="odd gradeX">
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 4.0</td>
-                                        <td>Win 95+</td>
-                                        <td class="center">4</td>
-                                        <td class="center">X</td>
-										<td><a href="submit" class="btn btn-success">Editar</a> <a href="submit" class="btn btn-danger">Eliminar</a></td>
+                                        <th>${admin.rut}</th>
+                                        <th>${admin.nombre}</th>
+                                        <th>${admin.apellidoPaterno} ${admin.apellidoMaterno}</th>
+                                        <th>${admin.telefono}</th>
+                                        <th>${admin.correo}</th>
+                                        <th>${admin.direccion}</th>
+										<td><a href="editadmin?id=${admin.idAdministrador}" class="btn btn-success">Editar</a> <a href="deleteadmin?id=${admin.idAdministrador}"  onclick="return validar();" class="btn btn-danger">Eliminar</a></td>
                                     </tr>
-                                                                       
+                                    </c:forEach>                                   
                                 </tbody>
                             </table>
                             <!-- /.table-responsive -->
